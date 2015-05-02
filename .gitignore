@@ -1,13 +1,24 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
+# npm modules
 node_modules/
+
+# phonegap / cordova code
 platforms/
 plugins/
+
+# bower modules
 bower_components/
 
+# output dir for development web server output
 .tmp/
+
+# output dir for phonegap / cordova build
 www/
+
+# output dir for Sass
 .sass-cache
+
 *.DS_Store
 *.log
