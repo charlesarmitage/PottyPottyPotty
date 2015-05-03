@@ -7,7 +7,7 @@
  * # HomeController
  */
 angular.module('PottyPottyPotty')
-  .controller('HomeController', function($scope, ExampleService) {
+  .controller('HomeController', function($scope) {
 
     $scope.pottyTrips = [];
 

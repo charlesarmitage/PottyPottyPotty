@@ -15,6 +15,7 @@ var streamqueue = require('streamqueue');
 var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var ripple = require('ripple-emulator');
+var karma = require('gulp-karma');
 
 /**
  * Parse arguments
@@ -281,6 +282,31 @@ gulp.task('ripple', ['scripts', 'styles', 'watchers'], function() {
   open('http://localhost:' + options.port + '?enableripple=true');
 });
 
+// Unit Testing
+// Pass non-existent file to force gulp karma to read karma.conf.js properly
+// See: http://stackoverflow.com/questions/22413767/angular-testing-with-karma-module-is-not-defined 
+// & https://github.com/lazd/gulp-karma/issues/9
+
+gulp.task('unittest', function() {
+  // Be sure to return the stream 
+  return gulp.src('./nonexistentfile')
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'run'
+    }))
+    .on('error', function(err) {
+      // Make sure failed tests cause gulp to exit non-zero 
+      throw err;
+    });
+});
+ 
+gulp.task('karma-watch', function() {
+  gulp.src('./nonexistentfile')
+    .pipe(karma({
+      configFile: 'karma.conf.js',
+      action: 'watch'
+    }));
+});
 
 // start watchers
 gulp.task('watchers', function() {
@@ -316,6 +342,7 @@ gulp.task('default', function(done) {
     'index',
     build ? 'noop' : 'watchers',
     build ? 'noop' : 'serve',
+    'karma-watch',
     emulate ? ['ionic:emulate', 'watchers'] : 'noop',
     run ? 'ionic:run' : 'noop',
     done);
