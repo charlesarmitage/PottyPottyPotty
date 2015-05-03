@@ -8,3 +8,5 @@ Install Sass gem for compiling Sass files:
 ### Run app in browser ###
 Run:
 `gulp`
+
+(Also runs karma/jasmine unit tests)
