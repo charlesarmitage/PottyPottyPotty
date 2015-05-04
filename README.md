@@ -11,7 +11,7 @@ contain more details about the available tasks and the options for running the a
 -- Runs the specs against Chrome and PhantomJS as a headless browser
 - Run e2e tests
 -- 'gulp e2e-tests'
--- Runs end to end Protractor tests and exits
+-- Runs end to end Protractor tests and exits. (Protractor tests are in: 'tests/e2e/specs')
 - Start a phonegap app
 -- 'gulp ???'
 
