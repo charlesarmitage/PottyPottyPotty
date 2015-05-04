@@ -7,10 +7,11 @@ contain more details about the available tasks and the options for running the a
 -- `gulp ???`
 - Run unit tests
 -- `gulp unittests`
--- Uses Karma to run Jasmine specs in 'test' directory and then exits
+-- Uses Karma to run Jasmine specs in 'tests/specs' directory and then exits
 -- Runs the specs against Chrome and PhantomJS as a headless browser
 - Run e2e tests
--- 'gulp ???'
+-- 'gulp e2e-tests'
+-- Runs end to end Protractor tests and exits
 - Start a phonegap app
 -- 'gulp ???'
 
@@ -26,7 +27,7 @@ During the above command you maybe asked which Angular version you want installe
 Install Sass gem for compiling Sass files:
 `gem install sass`
 
-### Run app in browser ###
+### Run app in browser for development ###
 Run:
 `gulp`
 
