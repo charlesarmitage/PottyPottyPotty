@@ -16,6 +16,7 @@ var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var ripple = require('ripple-emulator');
 var karma = require('gulp-karma');
+var angularProtractor = require('gulp-angular-protractor');
 
 /**
  * Parse arguments
@@ -233,12 +234,22 @@ gulp.task('index', ['jsHint', 'scripts'], function() {
 });
 
 // start local express server
+var expressServer = null;
+
 gulp.task('serve', function() {
-  express()
+    expressServer =
+    express()
     .use(!build ? connectLr() : function(){})
     .use(express.static(targetDir))
     .listen(port);
   open('http://localhost:' + port + '/');
+});
+
+gulp.task('stop-serve', function(){
+  if(expressServer){
+    expressServer.close();
+    process.exit();
+  }
 });
 
 // ionic emulate wrapper
@@ -306,6 +317,26 @@ gulp.task('karma-watch', function() {
       configFile: 'karma.conf.js',
       action: 'watch'
     }));
+});
+
+// e2e testing
+gulp.task('protractor-tests', function(){
+  return gulp.src(['./src/tests/*.js'])
+      .pipe(angularProtractor({
+          'configFile': 'tests/e2e/conf.js',
+          'args': ['--baseUrl', 'http://127.0.0.1:8000'],
+          'autoStartStopServer': true,
+          'debug': true
+      }))
+      .on('error', function(e) { throw e });  
+})
+
+gulp.task('e2e-tests', function(){
+  runSequence(
+    'serve',
+    'protractor-tests',
+    'stop-serve'
+    );
 });
 
 // start watchers
