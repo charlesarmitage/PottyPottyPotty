@@ -1,3 +1,5 @@
+Copyright 2015 Charles Armitage & Julian Churchill
+
 ## Status
 
 What can this app currently do? The build instructions are fine for a quick start, perhaps this section could
