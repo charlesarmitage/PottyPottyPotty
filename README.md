@@ -6,21 +6,21 @@ What can this app currently do? The build instructions are fine for a quick star
 contain more details about the available tasks and the options for running the app.
 
 - Find out all available gulp tasks
--- `gulp ???`
+ - `gulp ???`
 - Run unit tests
--- `gulp unittests`
--- Uses Karma to run Jasmine specs in 'tests/specs' directory and then exits
--- Runs the specs against Chrome and PhantomJS as a headless browser
+ - `gulp unittests`
+ - Uses Karma to run Jasmine specs in 'tests/specs' directory and then exits
+ - Runs the specs against Chrome and PhantomJS as a headless browser
 - Run e2e tests
--- 'gulp e2e-tests'
--- Runs end to end Protractor tests and exits. (Protractor tests are in: 'tests/e2e/specs')
+ - 'gulp e2e-tests'
+ - Runs end to end Protractor tests and exits. (Protractor tests are in: 'tests/e2e/specs')
 - Start a phonegap app
--- 'gulp ???'
+ - 'gulp ???'
 
 ## Build instructions
 
 ### Install dependencies ###
-`npm install & bower install`
+`npm install -g cordova ionic && npm install && bower install`
 
 During the above command you maybe asked which Angular version you want installed - I chose:
 "angular#~1.3.11 which resolved to 1.3.15 and is required by PottyPottyPotty"
