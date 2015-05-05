@@ -1,14 +1,30 @@
 describe('Potty Potty Potty', function() {
-  var statistics = element.all(by.repeater('statistic in statistics'));
+  var pottyTrips = element.all(by.repeater('trip in pottyTrips'));
 
   beforeEach(function() {
     browser.get('http://localhost:9000/#/app/home');
+    browser.waitForAngular();
   });
 
   describe('Home Page', function(){
     
     it('has a title', function() {
       expect(browser.getTitle()).toEqual('PottyPottyPotty');
+    });
+
+    it('has visible hint text when potty trip list is empty', function(){
+      var hintText = element(by.id('hint-text'));
+
+      expect(pottyTrips.count()).toEqual(0);
+      expect(hintText.isDisplayed()).toBeTruthy();
+      expect(hintText.getText()).toEqual('No potty trips added');
+    });
+
+    it('has hidden potty trip list when potty trip list is empty', function(){
+      var triplist = element(by.id('potty-trips'));
+
+      expect(pottyTrips.count()).toEqual(0);
+      expect(triplist.isDisplayed()).toBeFalsy();
     });
   });
 

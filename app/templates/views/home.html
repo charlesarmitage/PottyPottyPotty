@@ -5,15 +5,14 @@
     </ion-header-bar>
 
     <ion-content>
-        <ion-refresher
-            pulling-text="Pull to refresh..."
-            on-refresh="fetchRandomText()">
-        </ion-refresher>
-        <div class="loader" ng-if="!myHTML">
-            <ion-spinner></ion-spinner>
+        <div id="hint-text" class="content" ng-hide="pottyTrips.length > 0">
+            <i>No potty trips added</i>
         </div>
-        <div class="content" ng-bind-html="myHTML">
-        </div>
+        <ion-list id="potty-trips" type="card" ng-show="pottyTrips.length > 0">
+            <ion-item ng-repeat="trip in pottyTrips">
+            {{trip}}
+            </ion-item>
+        </ion-list>
     </ion-content>
 
 </ion-view>
