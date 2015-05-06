@@ -26,6 +26,13 @@ describe('Potty Potty Potty', function() {
       expect(pottyTrips.count()).toEqual(0);
       expect(triplist.isDisplayed()).toBeFalsy();
     });
+
+    it('clicking add button displays add page', function(){
+      var addTripButton = element(by.id('add-trip'));
+      addTripButton.click();
+
+      expect(browser.getLocationAbsUrl()).toEqual('/app/add');
+    });
   });
 
 });
