@@ -331,7 +331,7 @@ gulp.task('protractor-tests', function(){
       .on('error', function(e) { throw e });  
 })
 
-gulp.task('e2e-tests', function(){
+gulp.task('e2e-tests', ['build'], function(){
   runSequence(
     'serve',
     'protractor-tests',
@@ -357,6 +357,20 @@ gulp.task('watchers', function() {
 
 // no-op = empty function
 gulp.task('noop', function() {});
+
+gulp.task('build', function(){
+  runSequence(
+    'clean',
+    'iconfont',
+    [
+      'fonts',
+      'templates',
+      'styles',
+      'images',
+      'vendor'
+    ],
+    'index');
+});
 
 // our main sequence, with some conditional jobs depending on params
 gulp.task('default', function(done) {
