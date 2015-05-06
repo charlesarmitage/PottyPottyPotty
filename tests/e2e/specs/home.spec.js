@@ -17,7 +17,7 @@ describe('Potty Potty Potty', function() {
 
       expect(pottyTrips.count()).toEqual(0);
       expect(hintText.isDisplayed()).toBeTruthy();
-      expect(hintText.getText()).toEqual('No potty trips added');
+      expect(hintText.getText()).toEqual('Welcome! Would you like to add a potty trip?');
     });
 
     it('has hidden potty trip list when potty trip list is empty', function(){
