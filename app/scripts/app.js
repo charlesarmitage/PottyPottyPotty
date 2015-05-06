@@ -44,6 +44,16 @@ angular.module('PottyPottyPotty', ['ionic', 'ngCordova', 'ngResource'])
           }
         }
       })
+      .state('app.addTrip', {
+        url: '/add',
+        cache: true,
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/add.html',
+            controller: 'AddTripController'
+          }
+        }
+      })
       .state('app.settings', {
         url: '/settings',
         cache: true,
