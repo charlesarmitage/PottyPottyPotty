@@ -38,7 +38,7 @@ What can this app currently do? The build instructions are fine for a quick star
 contain more details about the available tasks and the options for running the app.
 
 - Find out all available gulp tasks
- - `gulp ???`
+ - `gulp --tasks
 
 ## Todo
 
