@@ -8,14 +8,14 @@
         <ul class="list">
             <li class="item item-checkbox">
                  <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" ng-model="trip.isWee">
                 </label>
                 Wee
             </li>
 
             <li class="item item-checkbox">
                  <label class="checkbox">
-                    <input type="checkbox">
+                    <input type="checkbox" ng-model="trip.isPoo">
                 </label>
                 Poo
             </li>
@@ -23,7 +23,7 @@
     </ion-content>
 
     <div class="tabs tabs-positive tabs-icon-only">
-      <a class="tab-item" ui-sref="app.home">
+      <a ng-click="addTrip(trip)" class="tab-item" ui-sref="app.home">
         <i class="icon ion-checkmark"></i>
       </a>
     </div>

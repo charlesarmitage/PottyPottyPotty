@@ -24,5 +24,7 @@ describe("Home Controller", function() {
 
 	    expect($scope.pottyTrips.length).toEqual(0);
 	  });
+
+	  // TODO: Work out a way of testing the adding of data to the home controller
 	});
 });
