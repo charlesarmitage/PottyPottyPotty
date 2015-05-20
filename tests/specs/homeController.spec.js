@@ -4,7 +4,17 @@ describe("Home Controller", function() {
     beforeEach(module('PottyPottyPotty'));
 
 	var $scope,
-		$controller;
+		$controller,
+		pottyTripsMock;
+
+	beforeEach(module(function($provide){
+		pottyTripsMock = {
+			trips : function(){
+				return [];
+			}
+		};
+		$provide.value('pottyTrips', pottyTripsMock);
+	}));
 
 	beforeEach(inject(function(_$controller_){
 

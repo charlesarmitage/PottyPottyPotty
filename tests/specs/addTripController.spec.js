@@ -5,14 +5,18 @@ describe("Add Trip Controller", function() {
 
 	var $scope,
 		$rootScope,
-		$controller;
+		$controller,
+		pottyTripsMock;
 
-	beforeEach(inject(function(_$controller_){
+	beforeEach(inject(function(_$controller_, pottyTrips){
+		pottyTripsMock = pottyTrips;
 
 	   $scope = {};
 	   $rootScope = {};
 	   function buildController(){
-	   		return _$controller_('AddTripController', { $scope: $scope, $rootScope: $rootScope });
+	   		return _$controller_('AddTripController', { 
+	   			$scope: $scope,
+	   			 pottyTrips: pottyTripsMock });
 	   };
 
 	   $controller = buildController();
@@ -32,7 +36,7 @@ describe("Add Trip Controller", function() {
 
 	  	$scope.addTrip($scope.trip);
 
-	  	expect($rootScope.trips.length).toEqual(0);
+	  	expect(pottyTripsMock.trips().length).toEqual(0);
 	  });
 
 	  it('adding a wee adds the trip to the trips', function(){
@@ -40,8 +44,8 @@ describe("Add Trip Controller", function() {
 
 	  	$scope.addTrip($scope.trip);
 
-	  	expect($rootScope.trips.length).toEqual(1);
-	  	expect($rootScope.trips[0]).toEqual({
+	  	expect(pottyTripsMock.trips().length).toEqual(1);
+	  	expect(pottyTripsMock.trips()[0]).toEqual({
 	  		isWee : true,
 	  		isPoo : false
 	  	});
@@ -52,8 +56,8 @@ describe("Add Trip Controller", function() {
 
 	  	$scope.addTrip($scope.trip);
 
-	  	expect($rootScope.trips.length).toEqual(1);
-	  	expect($rootScope.trips[0]).toEqual({
+	  	expect(pottyTripsMock.trips().length).toEqual(1);
+	  	expect(pottyTripsMock.trips()[0]).toEqual({
 	  		isWee : false,
 	  		isPoo : true
 	  	});
@@ -65,8 +69,8 @@ describe("Add Trip Controller", function() {
 
 	  	$scope.addTrip($scope.trip);
 
-	  	expect($rootScope.trips.length).toEqual(1);
-	  	expect($rootScope.trips[0]).toEqual({
+	  	expect(pottyTripsMock.trips().length).toEqual(1);
+	  	expect(pottyTripsMock.trips()[0]).toEqual({
 	  		isWee : true,
 	  		isPoo : true
 	  	});
@@ -76,8 +80,8 @@ describe("Add Trip Controller", function() {
 	  	addTripToController($scope, { poo: true });
 	  	addTripToController($scope, { wee: true });
 
-	  	expect($rootScope.trips.length).toEqual(2);
-	  	expect($rootScope.trips[1]).toEqual({
+	  	expect(pottyTripsMock.trips().length).toEqual(2);
+	  	expect(pottyTripsMock.trips()[1]).toEqual({
 	  		isWee : true,
 	  		isPoo : false
 	  	});
