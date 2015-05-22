@@ -52,5 +52,17 @@ describe("Potty Trips Service", function() {
 
 	    expect(service.trips().length).toEqual(0);
 	  });
+
+	  it('current timestamp set when trip added', function(){
+	  	trip.isWee = true;
+	  	var now = new Date();
+	  	var nowPlusSecond = new Date(now.getTime() + 1000);
+	  	var nowMinusSecond = new Date(now.getTime() - 1000);
+
+	  	service.add(trip);
+
+	  	expect(service.trips()[0].timestamp).toBeGreaterThan(nowMinusSecond);
+	  	expect(service.trips()[0].timestamp).toBeLessThan(nowPlusSecond);
+	  });
 	});
 });

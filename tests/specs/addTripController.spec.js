@@ -1,6 +1,36 @@
 'use strict';
 
 describe("Add Trip Controller", function() {
+	var customMatchers = {
+		toEqualTrip : function() {
+			return {
+				compare : function(actual, expected) {
+					var result = {};
+
+					result.pass = actual.isWee === expected.isWee &&
+									actual.isPoo == expected.isPoo;
+
+					if(result.pass){
+						result.message = "Actual trip equals expected trip";
+					} else {
+						result.message = "Mismatch : "
+										+ "Actual {isWee:" + actual.isWee
+										+ ", isPoo:" + actual.isPoo +"}"
+										+ " does not equal: " 
+										+ "Expected {isWee:" + expected.isWee
+										+ ", isPoo: " + expected.isPoo
+										+ "}";
+					}
+					return result;
+				}
+			}
+		}
+	};
+
+	beforeEach(function() {
+    	jasmine.addMatchers(customMatchers);
+  	});
+
     beforeEach(module('PottyPottyPotty'));
 
 	var $scope,
@@ -45,7 +75,7 @@ describe("Add Trip Controller", function() {
 	  	$scope.addTrip($scope.trip);
 
 	  	expect(pottyTripsMock.trips().length).toEqual(1);
-	  	expect(pottyTripsMock.trips()[0]).toEqual({
+	  	expect(pottyTripsMock.trips()[0]).toEqualTrip({
 	  		isWee : true,
 	  		isPoo : false
 	  	});
@@ -57,7 +87,7 @@ describe("Add Trip Controller", function() {
 	  	$scope.addTrip($scope.trip);
 
 	  	expect(pottyTripsMock.trips().length).toEqual(1);
-	  	expect(pottyTripsMock.trips()[0]).toEqual({
+	  	expect(pottyTripsMock.trips()[0]).toEqualTrip({
 	  		isWee : false,
 	  		isPoo : true
 	  	});
@@ -70,7 +100,7 @@ describe("Add Trip Controller", function() {
 	  	$scope.addTrip($scope.trip);
 
 	  	expect(pottyTripsMock.trips().length).toEqual(1);
-	  	expect(pottyTripsMock.trips()[0]).toEqual({
+	  	expect(pottyTripsMock.trips()[0]).toEqualTrip({
 	  		isWee : true,
 	  		isPoo : true
 	  	});
@@ -81,7 +111,7 @@ describe("Add Trip Controller", function() {
 	  	addTripToController($scope, { wee: true });
 
 	  	expect(pottyTripsMock.trips().length).toEqual(2);
-	  	expect(pottyTripsMock.trips()[1]).toEqual({
+	  	expect(pottyTripsMock.trips()[1]).toEqualTrip({
 	  		isWee : true,
 	  		isPoo : false
 	  	});

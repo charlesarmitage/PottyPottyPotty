@@ -12,7 +12,9 @@ angular.module('PottyPottyPotty')
 
   		add : function(trip){
   			if(trip.isWee === true || trip.isPoo === true){
-  				pottyTrips.push(angular.copy(trip));
+  				var newTrip = angular.copy(trip);
+  				newTrip.timestamp = new Date();
+  				pottyTrips.push(newTrip);
   			}
   		}
   	};
