@@ -9,7 +9,7 @@
             <i>Welcome! Would you like to add a potty trip?</i>
         </div>
         <ion-list id="potty-trips" type="card" ng-show="pottyTrips.length > 0">
-            <ion-item ng-repeat="trip in pottyTrips">
+            <ion-item ng-repeat="trip in pottyTrips | orderBy:'-timestamp'">
             <!-- TODO: Improve presentation. Supply text from controller -->
             <span ng-show="trip.isWee">Wee</span>
             <span ng-show="trip.isWee && trip.isPoo"> & </span>
