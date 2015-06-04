@@ -1,9 +1,10 @@
-language: node_js
-node_js:
-  - "0.12"
+language: java
+#node_js:
+#  - "0.12"
 before_script:
   - npm install -g gulp cordova ionic
   - gem install sass
+  - npm install
   - bower install
 script: 
   - gulp build
