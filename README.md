@@ -1,14 +1,13 @@
 Copyright 2015 Charles Armitage & Julian Churchill
 
+https://travis-ci.org/charlesarmitage/PottyPottyPotty.svg?branch=master
+
 ## Quick Start
 
 ## Build instructions
 
 ### Install dependencies ###
 `npm install -g cordova ionic && npm install && bower install`
-
-During the above command you maybe asked which Angular version you want installed - I chose:
-"angular#~1.3.11 which resolved to 1.3.15 and is required by PottyPottyPotty"
 
 ### Install Sass ###
 Install Sass gem for compiling Sass files:
@@ -53,11 +52,7 @@ What can this app currently do? The build instructions are fine for a quick star
 contain more details about the available tasks and the options for running the app.
 
 - Find out all available gulp tasks
- - `gulp --tasks
-
-## Todo
-
-- Is there anyway of automating: "angular#~1.3.11 which resolved to 1.3.15 and is required by PottyPottyPotty" during npm install?
+ - `gulp -T
 
 ## Done
 
