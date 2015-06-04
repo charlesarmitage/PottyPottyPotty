@@ -6,4 +6,6 @@ before_script:
   - npm install -g gulp
   - gem install sass
   - bower install
-script: gulp
+script: 
+  - gulp build
+  - gulp unittest
