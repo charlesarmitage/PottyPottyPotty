@@ -1,6 +1,6 @@
 Copyright 2015 Charles Armitage & Julian Churchill
 
-https://travis-ci.org/charlesarmitage/PottyPottyPotty.svg?branch=master
+[![Build Status](https://travis-ci.org/charlesarmitage/PottyPottyPotty.svg?branch=master)](https://travis-ci.org/charlesarmitage/PottyPottyPotty)
 
 ## Quick Start
 
