@@ -5,4 +5,5 @@ node_js:
 before_script:
   - npm install -g gulp
   - gem install sass
+  - bower install
 script: gulp
