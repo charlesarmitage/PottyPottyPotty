@@ -31,6 +31,7 @@ Run:
 - Start a phonegap app
  - 'gulp --run android'
   - Before running this for the first time you may have to run 'cordova platform add android' and possibly run the android SDK manager to install a suitable SDK version.
+  - If the app does not start/install on the emulator then you will need to manually install it with 'adb install <apk_path>'. Subsequent calls to 'gulp --run android' should start the app from then on.
   - JJC notes:
     - First time I ran it I was instructed to run 'cordova platform add android'
     - Then running 'gulp --run android' gave me another instruction to "Please install Android target: \"android-22\".". It told me how to run the android SDK manager as installed on my machine, which I did and I ran the update to update the SDK tools and install android-22.
@@ -44,7 +45,8 @@ Run:
     - Next the app built and installed but i couldn't find it on the emulator. I noticed the following error in the app compilation:
       "It is recommended that the compiler be upgraded. major version 51 is newer than 50"
       - I discovered this referred to javac - 51 => Java 7, 50 => Java 6. I had previously set java 7 to be the default with 'sudo update-alternatives --config java' but this only set 'java'. To set 'javac' you have to 'sudo update-alternatives --config javac' and select a Java 7 compiler (I chose the OpenJDK to match the Java runtime environment). I also did 'rm -rf platforms/android ; cordova add platform android' to force it to recompile everything afresh.
-    - App appears to build and install correctly but I still cannot find it on the emulator.
+    - App appears to build but I still cannot find it on the emulator.
+        - After manually installing it with 'adb install <apk>' the app now starts when running 'gulp --run android'
 
 ## Status
 
