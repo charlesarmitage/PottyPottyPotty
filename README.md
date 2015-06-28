@@ -14,24 +14,44 @@ Install Sass gem for compiling Sass files:
 `gem install sass`
 
 ### Run app in browser for development ###
-Run:
-`gulp`
+- Build and unit test, run app in browser, watch for changes.
+ - `gulp`
 
 (Also runs karma/jasmine unit tests)
 
-### Other build options ###
+## Gulp tasks
 
-- Run unit tests
- - `gulp unittests`
+- Run default actions. Clean, build, use karma to run jasmine tests, display results in a browser and watch for changes. Also start app in a browser with 'express', watch for changes, rebuild and restart automatically. This task is recommended as it will ensure all source is rebuilt correctly and tests are rerun.
+ - `gulp`
+- Find out all available gulp tasks
+ - `gulp -T`
+- Build javascript app then stop
+ - `gulp build`
+- Run unit tests then stop, no rebuilding
+ - `gulp unittest`
  - Uses Karma to run Jasmine specs in 'tests/specs' directory and then exits
- - Runs the specs against Chrome and PhantomJS as a headless browser
-- Run e2e tests
+ - Runs the specs against PhantomJS as a headless browser
+- Run end to end (e2e) tests then stop, no rebuilding
  - `gulp e2e-tests`
  - Runs end to end Protractor tests and exits. (Protractor tests are in: 'tests/e2e/specs')
-- Start a phonegap app
+- Build a phonegap app
+ - ???
+- Build and start a phonegap app in the emulator
  - 'gulp --run android'
   - Before running this for the first time you may have to run 'cordova platform add android' and possibly run the android SDK manager to install a suitable SDK version.
   - If the app does not start/install on the emulator then you will need to manually install it with 'adb install <apk_path>'. Subsequent calls to 'gulp --run android' should start the app from then on.
+  - If you have further problems please review the 'notes' section below
+
+## Status
+
+What can this app currently do? The build instructions are fine for a quick start, perhaps this section could
+contain more details about the available tasks and the options for running the app.
+
+- See [Trello board](https://trello.com/b/CssnKlKA/potty-training-app)
+
+## Notes
+
+- Build and start a phonegap app in the emulator
   - JJC notes:
     - First time I ran it I was instructed to run 'cordova platform add android'
     - Then running 'gulp --run android' gave me another instruction to "Please install Android target: \"android-22\".". It told me how to run the android SDK manager as installed on my machine, which I did and I ran the update to update the SDK tools and install android-22.
@@ -47,15 +67,3 @@ Run:
       - I discovered this referred to javac - 51 => Java 7, 50 => Java 6. I had previously set java 7 to be the default with 'sudo update-alternatives --config java' but this only set 'java'. To set 'javac' you have to 'sudo update-alternatives --config javac' and select a Java 7 compiler (I chose the OpenJDK to match the Java runtime environment). I also did 'rm -rf platforms/android ; cordova add platform android' to force it to recompile everything afresh.
     - App appears to build but I still cannot find it on the emulator.
         - After manually installing it with 'adb install <apk>' the app now starts when running 'gulp --run android'
-
-## Status
-
-What can this app currently do? The build instructions are fine for a quick start, perhaps this section could
-contain more details about the available tasks and the options for running the app.
-
-- Find out all available gulp tasks
- - `gulp -T
-
-## Done
-
-Completed tasks
