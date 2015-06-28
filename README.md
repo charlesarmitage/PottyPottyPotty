@@ -46,6 +46,14 @@ Run:
       - I discovered this referred to javac - 51 => Java 7, 50 => Java 6. I had previously set java 7 to be the default with 'sudo update-alternatives --config java' but this only set 'java'. To set 'javac' you have to 'sudo update-alternatives --config javac' and select a Java 7 compiler (I chose the OpenJDK to match the Java runtime environment). I also did 'rm -rf platforms/android ; cordova add platform android' to force it to recompile everything afresh.
     - App appears to build and install correctly but I still cannot find it on the emulator.
 
+## Building for Android
+
+Add Android platform to project directory:
+`cordova platform add android`
+
+Build Ionic app:
+`ionic build android`
+
 ## Status
 
 What can this app currently do? The build instructions are fine for a quick start, perhaps this section could
