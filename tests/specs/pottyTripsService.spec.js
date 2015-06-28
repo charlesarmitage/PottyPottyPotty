@@ -1,5 +1,12 @@
 'use strict';
 
+function weeTrip(){
+	return {
+		isWee : true,
+		isPoo : false
+	}
+};
+
 describe("Potty Trips Service", function() {
     beforeEach(module('PottyPottyPotty'));
 
@@ -64,5 +71,23 @@ describe("Potty Trips Service", function() {
 	  	expect(service.trips()[0].timestamp).toBeGreaterThan(nowMinusSecond);
 	  	expect(service.trips()[0].timestamp).toBeLessThan(nowPlusSecond);
 	  });
+
+	  it('calculates time since last trip', function(){
+	  	var now = new Date();
+	  	service.setTimeStamper(function(){ return now; });
+	  	trip.isWee = true;
+	  	service.add(trip);
+
+	  	var nowPlusTenSeconds = new Date(now.getTime() + 10000);
+	  	service.setTimeStamper(function(){ return nowPlusTenSeconds; });
+    	service.add(weeTrip());
+
+	    expect(service.trips().length).toEqual(2);
+	  	var timeDifference = nowPlusTenSeconds - now;
+	  	expect(service.trips()[1].timeSinceLast).toEqual(timeDifference);
+	  });
+
+	  // TODO: test time since last wee is only for wees
+	  // TODO: test time since last poo is only for poo
 	});
 });
