@@ -35,7 +35,7 @@ Install Sass gem for compiling Sass files:
  - `gulp e2e-tests`
  - Runs end to end Protractor tests and exits. (Protractor tests are in: 'tests/e2e/specs')
 - Build a phonegap app
- - ???
+ - `gulp build-android
 - Build and start a phonegap app in the emulator
  - 'gulp --run android'
   - Before running this for the first time you may have to run 'cordova platform add android' and possibly run the android SDK manager to install a suitable SDK version.

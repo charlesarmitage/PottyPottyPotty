@@ -262,6 +262,10 @@ gulp.task('ionic:run', plugins.shell.task([
   'ionic run ' + run
 ]));
 
+gulp.task('ionic:build-android', plugins.shell.task([
+  'ionic build android'
+]));
+
 // ionic resources wrapper
 gulp.task('icon', plugins.shell.task([
   'ionic resources --icon'
@@ -295,22 +299,22 @@ gulp.task('ripple', ['scripts', 'styles', 'watchers'], function() {
 
 // Unit Testing
 // Pass non-existent file to force gulp karma to read karma.conf.js properly
-// See: http://stackoverflow.com/questions/22413767/angular-testing-with-karma-module-is-not-defined 
+// See: http://stackoverflow.com/questions/22413767/angular-testing-with-karma-module-is-not-defined
 // & https://github.com/lazd/gulp-karma/issues/9
 
 gulp.task('unittest', function() {
-  // Be sure to return the stream 
+  // Be sure to return the stream
   return gulp.src('./nonexistentfile')
     .pipe(karma({
       configFile: 'karma.conf.js',
       action: 'run'
     }))
     .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero 
+      // Make sure failed tests cause gulp to exit non-zero
       throw err;
     });
 });
- 
+
 gulp.task('karma-watch', function() {
   gulp.src('./nonexistentfile')
     .pipe(karma({
@@ -328,7 +332,7 @@ gulp.task('protractor-tests', function(){
           'autoStartStopServer': true,
           'debug': true
       }))
-      .on('error', function(e) { throw e });  
+      .on('error', function(e) { throw e });
 })
 
 gulp.task('e2e-tests', ['build'], function(){
@@ -370,6 +374,12 @@ gulp.task('build', function(){
       'vendor'
     ],
     'index');
+});
+
+gulp.task('build-android', function(done) {
+  runSequence(
+    'build',
+    'ionic:build-android');
 });
 
 // our main sequence, with some conditional jobs depending on params
