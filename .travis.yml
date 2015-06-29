@@ -21,4 +21,5 @@ before_script:
   - npm install
   - bower install
 script: 
-  - gulp --build
+  - gulp build
+  - gulp unittest
