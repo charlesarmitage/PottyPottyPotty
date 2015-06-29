@@ -28,38 +28,42 @@ angular.module('PottyPottyPotty')
       return wee;
     }
 
+    function trips(){
+      return pottyTrips;
+    }
+
+    function setTimeStamper(t){
+      timeStamper = t;
+    }
+
+    function updateTripTimes(trip){
+      trip.timestamp = timeStamper();
+      if(trip.isWee) {
+        var lw = lastWee();
+        if(lw !== undefined) {
+          trip.timeSinceLastWee = trip.timestamp - lw.timestamp;
+        }
+      }
+      if(trip.isPoo) {
+        var lp = lastPoo();
+        if(lp !== undefined) {
+          trip.timeSinceLastPoo = trip.timestamp - lp.timestamp;
+        }
+      }
+    }
+
+    function add(trip){
+      if(trip.isWee === true || trip.isPoo === true){
+        var newTrip = angular.copy(trip);
+        updateTripTimes(newTrip);
+        pottyTrips.push(newTrip);
+      }
+    }
+
+    // return public API only
   	return {
-      setTimeStamper : function(t){
-        timeStamper = t;
-      },
-
-  		trips : function(){
-  			return pottyTrips;
-  		},
-
-      // TODO: How to make this private? (i.e. not part of the public interface...)
-      updateTripTimes : function(trip){
-  				trip.timestamp = timeStamper();
-          if(trip.isWee) {
-            var lw = lastWee();
-            if(lw !== undefined) {
-              trip.timeSinceLastWee = trip.timestamp - lw.timestamp;
-            }
-          }
-          if(trip.isPoo) {
-            var lp = lastPoo();
-            if(lp !== undefined) {
-              trip.timeSinceLastPoo = trip.timestamp - lp.timestamp;
-            }
-          }
-      },
-
-      add : function(trip){
-        if(trip.isWee === true || trip.isPoo === true){
-          var newTrip = angular.copy(trip);
-          this.updateTripTimes(newTrip);
-  				pottyTrips.push(newTrip);
-  			}
-  		}
+      setTimeStamper : setTimeStamper,
+  		trips : trips,
+      add : add
   	};
   });
