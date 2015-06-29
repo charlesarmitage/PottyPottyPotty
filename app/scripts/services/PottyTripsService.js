@@ -8,6 +8,26 @@ angular.module('PottyPottyPotty')
       return new Date();
     };
 
+    function lastPoo() {
+      var poo;
+      for (var i = 0; i < pottyTrips.length; i++) {
+        if(pottyTrips[i].isPoo) {
+          poo = pottyTrips[i];
+        }
+      }
+      return poo;
+    }
+
+    function lastWee() {
+      var wee;
+      for (var i = 0; i < pottyTrips.length; i++) {
+        if(pottyTrips[i].isWee) {
+          wee = pottyTrips[i];
+        }
+      }
+      return wee;
+    }
+
   	return {
       setTimeStamper : function(t){
         timeStamper = t;
@@ -20,10 +40,17 @@ angular.module('PottyPottyPotty')
       // TODO: How to make this private? (i.e. not part of the public interface...)
       updateTripTimes : function(trip){
   				trip.timestamp = timeStamper();
-          if(pottyTrips.length > 0){
-            trip.timeSinceLast = trip.timestamp - pottyTrips[pottyTrips.length-1].timestamp;
-          } else {
-            trip.timeSinceLast = 0;
+          if(trip.isWee) {
+            var lw = lastWee();
+            if(lw !== undefined) {
+              trip.timeSinceLastWee = trip.timestamp - lw.timestamp;
+            }
+          }
+          if(trip.isPoo) {
+            var lp = lastPoo();
+            if(lp !== undefined) {
+              trip.timeSinceLastPoo = trip.timestamp - lp.timestamp;
+            }
           }
       },
 
