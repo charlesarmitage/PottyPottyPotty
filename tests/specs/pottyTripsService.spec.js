@@ -1,17 +1,34 @@
 'use strict';
 
-function weeTrip(){
-	return {
-		isWee : true,
-		isPoo : false
-	}
-};
-
 describe("Potty Trips Service", function() {
     beforeEach(module('PottyPottyPotty'));
 
     var service,
     	trip;
+
+	function weeTrip(){
+		return {
+			isWee : true,
+			isPoo : false
+		}
+	};
+
+	function pooTrip(){
+		return {
+			isWee : false,
+			isPoo : true
+		}
+	};
+
+	function addWeeTripWithTime(t){
+	  	service.setTimeStamper(function(){ return t; });
+	  	service.add(weeTrip());
+	};
+
+	function addPooTripWithTime(t){
+	  	service.setTimeStamper(function(){ return t; });
+	  	service.add(pooTrip());
+	};
 
     beforeEach(inject(function(pottyTrips){
     	service = pottyTrips;
@@ -61,33 +78,44 @@ describe("Potty Trips Service", function() {
 	  });
 
 	  it('current timestamp set when trip added', function(){
-	  	trip.isWee = true;
 	  	var now = new Date();
 	  	var nowPlusSecond = new Date(now.getTime() + 1000);
 	  	var nowMinusSecond = new Date(now.getTime() - 1000);
 
-	  	service.add(trip);
+	  	service.add(weeTrip());
 
 	  	expect(service.trips()[0].timestamp).toBeGreaterThan(nowMinusSecond);
 	  	expect(service.trips()[0].timestamp).toBeLessThan(nowPlusSecond);
 	  });
 
-	  it('calculates time since last trip', function(){
+	  it('calculates time since last wee trip', function(){
 	  	var now = new Date();
-	  	service.setTimeStamper(function(){ return now; });
-	  	trip.isWee = true;
-	  	service.add(trip);
+	  	addWeeTripWithTime(now);
+
+	  	addPooTripWithTime(new Date(now.getTime() + 5000));
 
 	  	var nowPlusTenSeconds = new Date(now.getTime() + 10000);
-	  	service.setTimeStamper(function(){ return nowPlusTenSeconds; });
-    	service.add(weeTrip());
+	  	addWeeTripWithTime(nowPlusTenSeconds);
 
-	    expect(service.trips().length).toEqual(2);
+	  	var lastTrip = service.trips()[service.trips().length-1];
 	  	var timeDifference = nowPlusTenSeconds - now;
-	  	expect(service.trips()[1].timeSinceLast).toEqual(timeDifference);
+	  	expect(lastTrip.timeSinceLastWee).toEqual(timeDifference);
+	  	expect(lastTrip.timeSinceLastPoo).toEqual(undefined);
 	  });
 
-	  // TODO: test time since last wee is only for wees
-	  // TODO: test time since last poo is only for poo
+	  it('calculates time since last poo trip', function(){
+	  	var now = new Date();
+	  	addPooTripWithTime(now);
+
+	  	addWeeTripWithTime(new Date(now.getTime() + 5000));
+
+	  	var nowPlusTenSeconds = new Date(now.getTime() + 10000);
+	  	addPooTripWithTime(nowPlusTenSeconds);
+
+	  	var lastTrip = service.trips()[service.trips().length-1];
+	  	var timeDifference = nowPlusTenSeconds - now;
+	  	expect(lastTrip.timeSinceLastPoo).toEqual(timeDifference);
+	  	expect(lastTrip.timeSinceLastWee).toEqual(undefined);
+	  });
 	});
 });
