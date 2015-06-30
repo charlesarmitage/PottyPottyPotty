@@ -20,6 +20,7 @@ before_script:
   - gem install sass
   - npm install
   - bower install
+  - cordova platform add android
 script: 
   - gulp build-android -b
   - gulp unittest
