@@ -1,6 +1,4 @@
 language: java
-#node_js:
-#  - "0.12"
 before_script:
   # Install base Android SDK
   - sudo apt-get update -qq
@@ -20,7 +18,8 @@ before_script:
   - gem install sass
   - npm install
   - bower install
-  - cordova platform add android
 script: 
+  - gulp build -b
+  - cordova platform add android
   - gulp build-android -b
   - gulp unittest
