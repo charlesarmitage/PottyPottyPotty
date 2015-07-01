@@ -10,7 +10,7 @@
  */
 
 
-angular.module('PottyPottyPotty', ['ionic', 'ngCordova', 'ngResource'])
+angular.module('PottyPottyPotty', ['angularMoment', 'ionic', 'ngCordova', 'ngResource'])
 
   .run(function($ionicPlatform) {
 

@@ -51,6 +51,12 @@ contain more details about the available tasks and the options for running the a
 
 ## Notes
 
+- Adding angular modules/bower components
+  - In summary:
+    - add script paths to vendor.json and karma.conf.js
+    - add to app.js as a dependency if you're adding an angular module
+  - Example - adding angular-moment to add date difference time stamps for since last wee/poo in home.html
+
 - Build and start a phonegap app in the emulator
   - JJC notes:
     - First time I ran it I was instructed to run 'cordova platform add android'

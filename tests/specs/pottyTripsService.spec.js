@@ -88,7 +88,7 @@ describe("Potty Trips Service", function() {
 	  	expect(service.trips()[0].timestamp).toBeLessThan(nowPlusSecond);
 	  });
 
-	  it('calculates time since last wee trip', function(){
+	  it('records timestamp of last wee trip', function(){
 	  	var now = new Date();
 	  	addWeeTripWithTime(now);
 
@@ -98,12 +98,11 @@ describe("Potty Trips Service", function() {
 	  	addWeeTripWithTime(nowPlusTenSeconds);
 
 	  	var lastTrip = service.trips()[service.trips().length-1];
-	  	var timeDifference = nowPlusTenSeconds - now;
-	  	expect(lastTrip.timeSinceLastWee).toEqual(timeDifference);
-	  	expect(lastTrip.timeSinceLastPoo).toEqual(undefined);
+	  	expect(lastTrip.timestampOfPreviousWee).toEqual(now);
+	  	expect(lastTrip.timestampOfPreviousPoo).toEqual(undefined);
 	  });
 
-	  it('calculates time since last poo trip', function(){
+	  it('records timestamp of last poo trip', function(){
 	  	var now = new Date();
 	  	addPooTripWithTime(now);
 
@@ -113,9 +112,8 @@ describe("Potty Trips Service", function() {
 	  	addPooTripWithTime(nowPlusTenSeconds);
 
 	  	var lastTrip = service.trips()[service.trips().length-1];
-	  	var timeDifference = nowPlusTenSeconds - now;
-	  	expect(lastTrip.timeSinceLastPoo).toEqual(timeDifference);
-	  	expect(lastTrip.timeSinceLastWee).toEqual(undefined);
+	  	expect(lastTrip.timestampOfPreviousPoo).toEqual(now);
+	  	expect(lastTrip.timestampOfPreviousWee).toEqual(undefined);
 	  });
 	});
 });
