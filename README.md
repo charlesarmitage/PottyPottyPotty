@@ -89,6 +89,16 @@ Travis build at: https://travis-ci.org/charlesarmitage/PottyPottyPotty
 
 Deploying artifacts to GitHub 'tags?': http://docs.travis-ci.com/user/deployment/releases/
 
+### Travis CLI
+
+`gem install travis`
+Possibly need to add more gem stuff to get it to install:
+`sudo apt-get install ruby1.9.1-dev`
+`sudo apt-get install build-essentials`
+
+Can now run Travis CLI for configuring build deployment...
+Run: `travis setup releases` with a GitHub OAuth ready (I have not done this yet)
+
 ## Status
 
 What can this app currently do? The build instructions are fine for a quick start, perhaps this section could
