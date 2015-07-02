@@ -22,10 +22,12 @@
         </ul>
     </ion-content>
 
-    <div class="tabs tabs-balanced tabs-icon-only">
-      <a ng-click="addTrip(trip)" class="tab-item" ui-sref="app.home" id="save-trip">
-        <i class="icon ion-checkmark"></i>
-      </a>
-    </div>
+    <span ng-show="trip.isValid()">
+        <div class="tabs tabs-balanced tabs-icon-only">
+          <a ng-click="addTrip(trip)" class="tab-item" ui-sref="app.home" id="save-trip">
+            <i class="icon ion-checkmark"></i>
+          </a>
+        </div>
+    </span>
 
 </ion-view>

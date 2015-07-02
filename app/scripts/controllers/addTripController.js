@@ -4,7 +4,14 @@ angular.module('PottyPottyPotty')
   .controller('AddTripController', function($scope, pottyTrips) {
   		$scope.trip = {
   			isWee: false,
-  			isPoo: false
+  			isPoo: false,
+        isValid: function() {
+          if( this.isWee || this.isPoo ) {
+            return true;
+          } else {
+            return false;
+          }
+        }
   		};
 
   		$scope.addTrip = function(trip){
