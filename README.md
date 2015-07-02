@@ -36,6 +36,7 @@ Install Sass gem for compiling Sass files:
  - Runs end to end Protractor tests and exits. (Protractor tests are in: 'tests/e2e/specs')
 - Build a phonegap app
  - `gulp build-android
+  - If you get the error "Current working directory is not a Cordova-based project" then run `gulp -b` to create the www directory then re-run `gulp build-android`.
 - Build and start a phonegap app in the emulator
  - 'gulp --run android'
   - Before running this for the first time you may have to run 'cordova platform add android' and possibly run the android SDK manager to install a suitable SDK version.
