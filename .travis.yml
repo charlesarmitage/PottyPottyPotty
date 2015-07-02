@@ -26,3 +26,8 @@ script:
   - cordova platform add android
   - gulp build-android -b
   - gulp unittest
+
+after_script:
+  # Deploy apk - todo: add this copy to gulpfile for build-android
+  - mkdir builds/android
+  - mv platforms/android/build/outputs/apk/android-debug.apk builds/android/pottypottypotty-debug.apk

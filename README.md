@@ -83,6 +83,12 @@ Add Android platform to project directory:
 Build Ionic app:
 `ionic build android`
 
+## Travis
+
+Travis build at: https://travis-ci.org/charlesarmitage/PottyPottyPotty
+
+Deploying artifacts to GitHub 'tags?': http://docs.travis-ci.com/user/deployment/releases/
+
 ## Status
 
 What can this app currently do? The build instructions are fine for a quick start, perhaps this section could
