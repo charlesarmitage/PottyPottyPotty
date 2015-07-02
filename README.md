@@ -36,6 +36,7 @@ Install Sass gem for compiling Sass files:
  - Runs end to end Protractor tests and exits. (Protractor tests are in: 'tests/e2e/specs')
 - Build a phonegap app
  - `gulp build-android
+  - If you get the error "Current working directory is not a Cordova-based project" then run `gulp -b` to create the www directory then re-run `gulp build-android`.
 - Build and start a phonegap app in the emulator
  - 'gulp --run android'
   - Before running this for the first time you may have to run 'cordova platform add android' and possibly run the android SDK manager to install a suitable SDK version.
@@ -50,6 +51,12 @@ contain more details about the available tasks and the options for running the a
 - See [Trello board](https://trello.com/b/CssnKlKA/potty-training-app)
 
 ## Notes
+
+- Adding angular modules/bower components
+  - In summary:
+    - add script paths to vendor.json and karma.conf.js
+    - add to app.js as a dependency if you're adding an angular module
+  - Example - adding angular-moment to add date difference time stamps for since last wee/poo in home.html
 
 - Build and start a phonegap app in the emulator
   - JJC notes:

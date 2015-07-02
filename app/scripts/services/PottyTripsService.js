@@ -41,13 +41,13 @@ angular.module('PottyPottyPotty')
       if(trip.isWee) {
         var lw = lastWee();
         if(lw !== undefined) {
-          trip.timeSinceLastWee = trip.timestamp - lw.timestamp;
+          trip.timestampOfPreviousWee = lw.timestamp;
         }
       }
       if(trip.isPoo) {
         var lp = lastPoo();
         if(lp !== undefined) {
-          trip.timeSinceLastPoo = trip.timestamp - lp.timestamp;
+          trip.timestampOfPreviousPoo = lp.timestamp;
         }
       }
     }

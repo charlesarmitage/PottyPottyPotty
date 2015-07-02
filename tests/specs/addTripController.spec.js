@@ -16,7 +16,7 @@ describe("Add Trip Controller", function() {
 						result.message = "Mismatch : "
 										+ "Actual {isWee:" + actual.isWee
 										+ ", isPoo:" + actual.isPoo +"}"
-										+ " does not equal: " 
+										+ " does not equal: "
 										+ "Expected {isWee:" + expected.isWee
 										+ ", isPoo: " + expected.isPoo
 										+ "}";
@@ -44,7 +44,7 @@ describe("Add Trip Controller", function() {
 	   $scope = {};
 	   $rootScope = {};
 	   function buildController(){
-	   		return _$controller_('AddTripController', { 
+	   		return _$controller_('AddTripController', {
 	   			$scope: $scope,
 	   			 pottyTrips: pottyTripsMock });
 	   };
@@ -120,10 +120,8 @@ describe("Add Trip Controller", function() {
 	  it('current potty trip is reset after added to trips list', function(){
 	  	addTripToController($scope, { wee: true, poo: true });
 
-	  	expect($scope.trip).toEqual({
-	  		isWee: false,
-	  		isPoo: false,
-	  	})
+	  	expect($scope.trip.isWee).toEqual(false);
+	  	expect($scope.trip.isPoo).toEqual(false);
 	  });
 
 	  function addTripToController($scope, trip){

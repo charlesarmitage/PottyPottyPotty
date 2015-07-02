@@ -1,31 +1,33 @@
 <ion-view>
     <ion-header-bar align-title="center" class="bar-balanced">
     <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
-        <h1 class="title">Add Potty Trip</h1>
+        <h1 class="title" id="title">Add Potty Trip</h1>
     </ion-header-bar>
 
     <ion-content>
         <ul class="list">
             <li class="item item-checkbox">
                  <label class="checkbox checkbox-balanced">
-                    <input type="checkbox" ng-model="trip.isWee">
+                    <input type="checkbox" ng-model="trip.isWee" id='is-wee'>
                 </label>
                 Wee
             </li>
 
             <li class="item item-checkbox">
                  <label class="checkbox checkbox-balanced">
-                    <input type="checkbox" ng-model="trip.isPoo">
+                    <input type="checkbox" ng-model="trip.isPoo" id='is-poo'>
                 </label>
                 Poo
             </li>
         </ul>
     </ion-content>
 
-    <div class="tabs tabs-balanced tabs-icon-only">
-      <a ng-click="addTrip(trip)" class="tab-item" ui-sref="app.home">
-        <i class="icon ion-checkmark"></i>
-      </a>
-    </div>
+    <span ng-show="trip.isValid()">
+        <div class="tabs tabs-balanced tabs-icon-only">
+          <a ng-click="addTrip(trip)" class="tab-item" ui-sref="app.home" id="save-trip">
+            <i class="icon ion-checkmark"></i>
+          </a>
+        </div>
+    </span>
 
 </ion-view>
