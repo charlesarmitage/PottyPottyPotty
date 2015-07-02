@@ -39,10 +39,6 @@ describe('Potty Potty Potty', function() {
       expect(saveTripButton.isDisplayed()).toBeTruthy();
     });
 
-    // it('has save button', function(){
-      // expect(saveTripButton.isDisplayed()).toBeTruthy();
-    // });
-
     it('clicking save button adds trip', function(){
       isWeeButton.click();
       saveTripButton.click();
