@@ -38,6 +38,8 @@ deploy:
   api_key:
     secure: SKYWxcbR6iILEPl+z8kmCNLWz8AvXpvVN4hix6y+ISfMPZQL1lZheE7qEUVbPX4HdHFHcw0d2AyE7AQXYzxBspq2GLTWHZjjn6jakRXGqEiIQytdlUc8ddcuG17IAKvy82SPDRz/9kyIuaPrMIP35fG8LjTFlvxV2EuQCZTqfII=
   file: builds/android/pottypottypotty-debug.apk
-
+  skip_cleanup: true
+  on:
+    tags: true
   on:
     repo: charlesarmitage/PottyPottyPotty
