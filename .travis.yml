@@ -32,7 +32,6 @@ before_deploy:
   # Deploy apk - todo: add this copy to gulpfile for build-android
   - mkdir -p builds/android
   - cp platforms/android/build/outputs/apk/android-debug.apk builds/android/pottypottypotty-debug.apk
-  - git fetch --tags
 
 deploy:
   provider: releases
