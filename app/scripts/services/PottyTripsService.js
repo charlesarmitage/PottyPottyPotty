@@ -53,10 +53,18 @@ angular.module('PottyPottyPotty')
     }
 
     function add(trip){
-      if(trip.isWee === true || trip.isPoo === true){
+      if(isValid(trip)){
         var newTrip = angular.copy(trip);
         updateTripTimes(newTrip);
         pottyTrips.push(newTrip);
+      }
+    }
+
+    function isValid(trip) {
+      if( trip.isWee === true || trip.isPoo === true ) {
+        return true;
+      } else {
+        return false;
       }
     }
 
@@ -64,6 +72,7 @@ angular.module('PottyPottyPotty')
   	return {
       setTimeStamper : setTimeStamper,
   		trips : trips,
-      add : add
+      add : add,
+      isValid: isValid
   	};
   });

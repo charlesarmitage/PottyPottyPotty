@@ -52,7 +52,7 @@ describe("Potty Trips Service", function() {
 	  	expect(service.trips().length).toEqual(1);
 	  });
 
-	  it('added trips are stored', function(){
+	  it('added trips are saved in the trips array', function(){
 	  	trip.isWee = true;
 	  	service.add(trip);
 

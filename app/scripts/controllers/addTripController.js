@@ -5,14 +5,11 @@ angular.module('PottyPottyPotty')
   		$scope.trip = {
   			isWee: false,
   			isPoo: false,
-        isValid: function() {
-          if( this.isWee || this.isPoo ) {
-            return true;
-          } else {
-            return false;
-          }
-        }
   		};
+
+      $scope.isValid = function(trip){
+        return pottyTrips.isValid(trip);
+      };
 
   		$scope.addTrip = function(trip){
   			pottyTrips.add(trip);

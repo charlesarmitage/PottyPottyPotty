@@ -24,7 +24,7 @@
 
     <!-- Style adjustments needed for bar-footer and buttons to make sure they go to the edges and the icons are not
          bumped off the bottom of the screen. That is what the default bar,bar-footer + button-full combination does. -->
-    <span ng-show="trip.isValid()">
+    <span ng-show="isValid(trip)">
         <div class="bar bar-footer" style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px">
             <div class="button-bar">
               <a ng-click="cancelAddTrip()" class="button button-full button-assertive" style="margin-top: 0px;margin-bottom: 0px" ui-sref="app.home" id="cancel-trip">
