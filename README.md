@@ -95,7 +95,7 @@ _Deploying Releases_
 
 Releases will be deployed when a tag is added to the github repo
 `git tag -a v0.57` -m"My awesome release"`
-`git push origin v0.57`
+`git push origin --tags`
 
 `gem install travis`
 Possibly need to add more gem stuff to get it to install:
