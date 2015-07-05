@@ -28,7 +28,7 @@ script:
   - gulp build-android -b
   - gulp unittest
 
-after_script:
+before_deploy::
   # Deploy apk - todo: add this copy to gulpfile for build-android
   - mkdir -p builds/android
   - cp platforms/android/build/outputs/apk/android-debug.apk builds/android/pottypottypotty-debug.apk
@@ -37,7 +37,7 @@ deploy:
   provider: releases
   api_key:
     secure: SKYWxcbR6iILEPl+z8kmCNLWz8AvXpvVN4hix6y+ISfMPZQL1lZheE7qEUVbPX4HdHFHcw0d2AyE7AQXYzxBspq2GLTWHZjjn6jakRXGqEiIQytdlUc8ddcuG17IAKvy82SPDRz/9kyIuaPrMIP35fG8LjTFlvxV2EuQCZTqfII=
-  file: platforms/android/build/outputs/apk/android-debug.apk
+  file: builds/android/pottypottypotty-debug.apk
   skip_cleanup: true
   on:
     tags: true
