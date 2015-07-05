@@ -1,6 +1,7 @@
 describe('Potty Potty Potty', function() {
   var pottyTrips = element.all(by.repeater('trip in pottyTrips'));
   var saveTripButton;
+  var cancelTripButton;
   var isWeeButton;
   var isPooButton;
 
@@ -10,6 +11,7 @@ describe('Potty Potty Potty', function() {
     var addTripButton = element(by.id('add-trip'));
     addTripButton.click();
     saveTripButton = element(by.id('save-trip'));
+    cancelTripButton = element(by.id('cancel-trip'));
     isWeeButton = element(by.id('is-wee'));
     isPooButton = element(by.id('is-poo'));
   });
@@ -21,36 +23,72 @@ describe('Potty Potty Potty', function() {
       expect(title.getText()).toEqual('Add Potty Trip');
     });
 
-    it('initially does not have save button', function(){
-      expect(saveTripButton.isDisplayed()).toBeFalsy();
+    describe('save button', function(){
+      it('initially not shown', function(){
+        expect(saveTripButton.isDisplayed()).toBeFalsy();
+      });
+
+      it('only shown when wee or poo is ticked', function(){
+        isWeeButton.click();
+        expect(saveTripButton.isDisplayed()).toBeTruthy();
+        isWeeButton.click();
+        expect(saveTripButton.isDisplayed()).toBeFalsy();
+        isPooButton.click();
+        expect(saveTripButton.isDisplayed()).toBeTruthy();
+        isPooButton.click();
+        expect(saveTripButton.isDisplayed()).toBeFalsy();
+        isWeeButton.click();
+        isPooButton.click();
+        expect(saveTripButton.isDisplayed()).toBeTruthy();
+      });
+
+      it('click adds trip', function(){
+        isWeeButton.click();
+        saveTripButton.click();
+
+        expect(pottyTrips.count()).toEqual(1);
+      });
+
+      it('click displays home page', function(){
+        isWeeButton.click();
+        saveTripButton.click();
+
+        expect(browser.getLocationAbsUrl()).toEqual('/app/home');
+      });
     });
 
-    it('has save button only when wee or poo is ticked', function(){
-      isWeeButton.click();
-      expect(saveTripButton.isDisplayed()).toBeTruthy();
-      isWeeButton.click();
-      expect(saveTripButton.isDisplayed()).toBeFalsy();
-      isPooButton.click();
-      expect(saveTripButton.isDisplayed()).toBeTruthy();
-      isPooButton.click();
-      expect(saveTripButton.isDisplayed()).toBeFalsy();
-      isWeeButton.click();
-      isPooButton.click();
-      expect(saveTripButton.isDisplayed()).toBeTruthy();
-    });
+    describe('cancel button', function(){
+      it('initially not shown', function(){
+        expect(cancelTripButton.isDisplayed()).toBeFalsy();
+      });
 
-    it('clicking save button adds trip', function(){
-      isWeeButton.click();
-      saveTripButton.click();
+      it('only shown when wee or poo is ticked', function(){
+        isWeeButton.click();
+        expect(cancelTripButton.isDisplayed()).toBeTruthy();
+        isWeeButton.click();
+        expect(cancelTripButton.isDisplayed()).toBeFalsy();
+        isPooButton.click();
+        expect(cancelTripButton.isDisplayed()).toBeTruthy();
+        isPooButton.click();
+        expect(cancelTripButton.isDisplayed()).toBeFalsy();
+        isWeeButton.click();
+        isPooButton.click();
+        expect(cancelTripButton.isDisplayed()).toBeTruthy();
+      });
 
-      expect(pottyTrips.count()).toEqual(1);
-    });
+      it('click does not add trip', function(){
+        isWeeButton.click();
+        cancelTripButton.click();
 
-    it('clicking save button displays home page', function(){
-      isWeeButton.click();
-      saveTripButton.click();
+        expect(pottyTrips.count()).toEqual(0);
+      });
 
-      expect(browser.getLocationAbsUrl()).toEqual('/app/home');
+      it('click displays home page', function(){
+        isWeeButton.click();
+        cancelTripButton.click();
+
+        expect(browser.getLocationAbsUrl()).toEqual('/app/home');
+      });
     });
   });
 

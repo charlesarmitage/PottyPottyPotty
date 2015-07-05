@@ -124,6 +124,14 @@ describe("Add Trip Controller", function() {
 	  	expect($scope.trip.isPoo).toEqual(false);
 	  });
 
+	  it('current potty trip is reset after cancel of add', function(){
+	  	$scope.trip = { wee: true, poo: true };
+  		$scope.cancelAddTrip();
+
+	  	expect($scope.trip.isWee).toEqual(false);
+	  	expect($scope.trip.isPoo).toEqual(false);
+	  });
+
 	  function addTripToController($scope, trip){
   		$scope.trip.isWee = trip.wee !== undefined ? trip.wee : false;
   		$scope.trip.isPoo = trip.poo !== undefined ? trip.poo : false;
