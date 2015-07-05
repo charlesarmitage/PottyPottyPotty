@@ -15,9 +15,13 @@ angular.module('PottyPottyPotty')
   		};
 
   		$scope.addTrip = function(trip){
-			pottyTrips.add(trip);
+  			pottyTrips.add(trip);
   			reset(); // TODO: May not be necessary
   		};
+
+      $scope.cancelAddTrip = function(){
+        reset();
+      };
 
   		function reset(){
   			$scope.trip.isWee = false;

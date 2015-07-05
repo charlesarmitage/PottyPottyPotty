@@ -1,6 +1,7 @@
 describe('Potty Potty Potty', function() {
   var pottyTrips = element.all(by.repeater('trip in pottyTrips'));
   var saveTripButton;
+  var cancelTripButton;
   var isWeeButton;
   var isPooButton;
 
@@ -10,6 +11,7 @@ describe('Potty Potty Potty', function() {
     var addTripButton = element(by.id('add-trip'));
     addTripButton.click();
     saveTripButton = element(by.id('save-trip'));
+    cancelTripButton = element(by.id('cancel-trip'));
     isWeeButton = element(by.id('is-wee'));
     isPooButton = element(by.id('is-poo'));
   });
@@ -49,6 +51,39 @@ describe('Potty Potty Potty', function() {
     it('clicking save button displays home page', function(){
       isWeeButton.click();
       saveTripButton.click();
+
+      expect(browser.getLocationAbsUrl()).toEqual('/app/home');
+    });
+
+    // TODO: Split this into a describe('cancel button') section
+    it('initially does not have cancel button', function(){
+      expect(cancelTripButton.isDisplayed()).toBeFalsy();
+    });
+
+    it('has cancel button only when wee or poo is ticked', function(){
+      isWeeButton.click();
+      expect(cancelTripButton.isDisplayed()).toBeTruthy();
+      isWeeButton.click();
+      expect(cancelTripButton.isDisplayed()).toBeFalsy();
+      isPooButton.click();
+      expect(cancelTripButton.isDisplayed()).toBeTruthy();
+      isPooButton.click();
+      expect(cancelTripButton.isDisplayed()).toBeFalsy();
+      isWeeButton.click();
+      isPooButton.click();
+      expect(cancelTripButton.isDisplayed()).toBeTruthy();
+    });
+
+    it('clicking cancel button does not add trip', function(){
+      isWeeButton.click();
+      cancelTripButton.click();
+
+      expect(pottyTrips.count()).toEqual(0);
+    });
+
+    it('clicking cancel button displays home page', function(){
+      isWeeButton.click();
+      cancelTripButton.click();
 
       expect(browser.getLocationAbsUrl()).toEqual('/app/home');
     });
