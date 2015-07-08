@@ -61,7 +61,8 @@ var errorHandler = function(error) {
 
 // clean target dir
 gulp.task('clean', function(done) {
-  del([targetDir], done);
+  // Clean should always clean all target dirs
+  del(['www','.tmp'], done);
 });
 
 // precompile .scss and concat with ionic.css
@@ -377,6 +378,8 @@ gulp.task('build', function(){
 });
 
 gulp.task('build-android', function(done) {
+  // always build to www for android
+  targetDir = path.resolve('www');
   runSequence(
     'build',
     'ionic:build-android');
