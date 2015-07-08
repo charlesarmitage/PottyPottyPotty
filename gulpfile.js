@@ -336,11 +336,12 @@ gulp.task('protractor-tests', function(){
       .on('error', function(e) { throw e });
 })
 
-gulp.task('e2e-tests', ['build'], function(){
+gulp.task('e2e-tests', ['build'], function(done){
   runSequence(
     'serve',
     'protractor-tests',
-    'stop-serve'
+    'stop-serve',
+    done
     );
 });
 
@@ -363,7 +364,7 @@ gulp.task('watchers', function() {
 // no-op = empty function
 gulp.task('noop', function() {});
 
-gulp.task('build', function(){
+gulp.task('build', function(done){
   runSequence(
     'clean',
     'iconfont',
@@ -374,7 +375,8 @@ gulp.task('build', function(){
       'images',
       'vendor'
     ],
-    'index');
+    'index',
+    done);
 });
 
 gulp.task('build-android', function(done) {
@@ -382,7 +384,8 @@ gulp.task('build-android', function(done) {
   targetDir = path.resolve('www');
   runSequence(
     'build',
-    'ionic:build-android');
+    'ionic:build-android',
+    done);
 });
 
 // our main sequence, with some conditional jobs depending on params
