@@ -15,7 +15,7 @@ before_script:
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
   # only update the sdk for the tools, platform-tools and build-tools (1,2,3) and whatever api level
-  # you are building for android (run "android list sdk" to get the full list.
+  # you are building for android (run "android list sdk --all --extended" to get the full list.
   - echo "y" | android update sdk --all --filter tools,platform-tools,build-tools-22.0.1,android-22 --no-ui --force
 
   - npm install -g gulp cordova ionic

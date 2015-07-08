@@ -91,6 +91,12 @@ Deploying artifacts to GitHub 'tags?': http://docs.travis-ci.com/user/deployment
 
 ### Travis CLI
 
+_Deploying Releases_
+
+Releases will be deployed when a tag is added to the github repo
+`git tag -a v0.57` -m"My awesome release"`
+`git push origin --tags`
+
 `gem install travis`
 Possibly need to add more gem stuff to get it to install:
 `sudo apt-get install ruby1.9.1-dev`
