@@ -36,21 +36,37 @@ describe("Add Trip Controller", function() {
 	var $scope,
 		$rootScope,
 		$controller,
-		pottyTripsMock;
+		pottyTripsMock,
+		mockLocalStorage;
 
-	beforeEach(inject(function(_$controller_, pottyTrips){
-		pottyTripsMock = pottyTrips;
+	beforeEach(function() {
+		// TODO: This is a duplicate of the mock in pottyTripsService.spec.js
+		//       Can we pull it out to a file to share it?
+		mockLocalStorage = {
+	        set: jasmine.createSpy(),
+	        get: jasmine.createSpy(),
+	        setObject: jasmine.createSpy(),
+	        getObject: function(key, defaultValue) { return []; }
+	    };
 
-	   $scope = {};
-	   $rootScope = {};
-	   function buildController(){
-	   		return _$controller_('AddTripController', {
-	   			$scope: $scope,
-	   			 pottyTrips: pottyTripsMock });
-	   };
+    	module(function($provide) {
+    		$provide.value('localstorage', mockLocalStorage);
+    	});
 
-	   $controller = buildController();
-	}));
+		inject(function(_$controller_, pottyTrips){
+			pottyTripsMock = pottyTrips;
+
+	   		$scope = {};
+	   		$rootScope = {};
+	 	    function buildController(){
+	   			return _$controller_('AddTripController', {
+	   				$scope: $scope,
+	   			 	pottyTrips: pottyTripsMock });
+	   		};
+
+	   		$controller = buildController();
+		});
+	});
 
     afterEach(function() {
     });

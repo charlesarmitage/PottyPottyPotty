@@ -13,11 +13,13 @@ describe("Potty Trips Service", function() {
     		isPoo : false
     	};
 
+		// TODO: This is a duplicate of the mock in addTripController.spec.js
+		//       Can we pull it out to a file to share it?
 		mockLocalStorage = {
 	        set: jasmine.createSpy(),
 	        get: jasmine.createSpy(),
 	        setObject: jasmine.createSpy(),
-	        getObject: function(key) { return []; }
+	        getObject: function(key, defaultValue) { return []; }
 	    };
 
     	module(function($provide) {
@@ -62,9 +64,12 @@ describe("Potty Trips Service", function() {
 	    });
 
 		it('loads trips on start', inject(function(pottyTrips) {
-			expect(mockLocalStorage.getObject).toHaveBeenCalledWith('potty-trips');
-			// expect(pottyTrips.trips()).toEqual(fakeTrips);
+			expect(mockLocalStorage.getObject).toHaveBeenCalledWith('potty-trips', []);
+			expect(pottyTrips.trips()).toEqual(fakeTrips);
 		}));
+
+		// TODO: Saves trips on add
+		// TODO: User can delete local storage data from menu
 	});
 
 	describe('Adding a potty trip', function() {

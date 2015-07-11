@@ -3,11 +3,7 @@
 angular.module('PottyPottyPotty')
   .factory('pottyTrips', function(localstorage) {
 
-  	var pottyTrips = [];
-    var loadedTrips = localstorage.getObject('potty-trips');
-    if(loadedTrips !== undefined ) {
-      // pottyTrips = angular.copy(loadedTrips);
-    }
+  	var pottyTrips = angular.copy(localstorage.getObject('potty-trips', []));
 
     var timeStamper = function(){
       return new Date();

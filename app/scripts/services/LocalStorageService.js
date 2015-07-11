@@ -12,11 +12,12 @@ angular.module('PottyPottyPotty')
       setObject: function(key, value) {
         $window.localStorage[key] = JSON.stringify(value);
       },
-      getObject: function(key) {
-        if($window.localStorage[key] === false ){
-          return undefined;
+      getObject: function(key, defaultValue) {
+        var value = $window.localStorage[key];
+        if(value === undefined ){
+          return defaultValue;
         }
-        return JSON.parse($window.localStorage[key] || '{}');
+        return JSON.parse(value || '{}');
       }
     };
   }]
