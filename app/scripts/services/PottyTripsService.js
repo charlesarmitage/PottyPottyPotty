@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('PottyPottyPotty')
-  .factory('pottyTrips', function($localstorage) {
+  .factory('pottyTrips', function(localstorage) {
 
   	var pottyTrips = [];
-    // var loadedTrips = $localstorage.getObject('potty-trips');
-    // if(loadedTrips !== undefined ) {
-    //   pottyTrips = loadedTrips;
-    // }
+    var loadedTrips = localstorage.getObject('potty-trips');
+    if(loadedTrips !== undefined ) {
+      // pottyTrips = angular.copy(loadedTrips);
+    }
 
     var timeStamper = function(){
       return new Date();
@@ -62,7 +62,7 @@ angular.module('PottyPottyPotty')
         var newTrip = angular.copy(trip);
         updateTripTimes(newTrip);
         pottyTrips.push(newTrip);
-        // $localstorage.setObject('potty-trips', pottyTrips);
+        // localstorage.setObject('potty-trips', pottyTrips);
       }
     }
 

@@ -1,10 +1,29 @@
 'use strict';
 
 describe("Potty Trips Service", function() {
-    beforeEach(module('PottyPottyPotty'));
+	var service,
+    	trip,
+    	mockLocalStorage;
 
-    var service,
-    	trip;
+    beforeEach( function() {
+    	module('PottyPottyPotty');
+
+    	trip = {
+    		isWee : false,
+    		isPoo : false
+    	};
+
+		mockLocalStorage = {
+	        set: jasmine.createSpy(),
+	        get: jasmine.createSpy(),
+	        setObject: jasmine.createSpy(),
+	        getObject: function(key) { return []; }
+	    };
+
+    	module(function($provide) {
+    		$provide.value('localstorage', mockLocalStorage);
+    	});
+    });
 
 	function weeTrip(){
 		return {
@@ -20,100 +39,109 @@ describe("Potty Trips Service", function() {
 		}
 	};
 
-	function addWeeTripWithTime(t){
-	  	service.setTimeStamper(function(){ return t; });
-	  	service.add(weeTrip());
+	function addWeeTripWithTime(pottyTrips, t){
+	  	pottyTrips.setTimeStamper(function(){ return t; });
+	  	pottyTrips.add(weeTrip());
 	};
 
-	function addPooTripWithTime(t){
-	  	service.setTimeStamper(function(){ return t; });
-	  	service.add(pooTrip());
+	function addPooTripWithTime(pottyTrips, t){
+	  	pottyTrips.setTimeStamper(function(){ return t; });
+	  	pottyTrips.add(pooTrip());
 	};
 
-    beforeEach(inject(function(pottyTrips){
-    	service = pottyTrips;
-    	trip = {
-    		isWee : false,
-    		isPoo : false
-    	}
-	}));
+	describe('local storage usage', function() {
+		var fakeTrips;
+
+	    beforeEach( function() {
+	    	fakeTrips = [
+	    		weeTrip(),
+	    		pooTrip()
+	    	];
+
+		    spyOn(mockLocalStorage, 'getObject').and.returnValue( fakeTrips );
+	    });
+
+		it('loads trips on start', inject(function(pottyTrips) {
+			expect(mockLocalStorage.getObject).toHaveBeenCalledWith('potty-trips');
+			// expect(pottyTrips.trips()).toEqual(fakeTrips);
+		}));
+	});
 
 	describe('Adding a potty trip', function() {
-	  it('nothing is added initially', function() {
+	  it('nothing is added initially', inject(function(pottyTrips) {
+	    expect(pottyTrips.trips().length).toEqual(0);
+	  }));
 
-	    expect(service.trips().length).toEqual(0);
-	  });
-
-	  it('adding a trip adds to array', function(){
+	  it('adding a trip adds to array', inject(function(pottyTrips){
 	  	trip.isWee = true;
 
-	  	service.add(trip);
+	  	pottyTrips.add(trip);
 
-	  	expect(service.trips().length).toEqual(1);
-	  });
+	  	expect(pottyTrips.trips().length).toEqual(1);
+	  }));
 
-	  it('added trips are saved in the trips array', function(){
+	  it('added trips are saved in the trips array', inject(function(pottyTrips){
 	  	trip.isWee = true;
-	  	service.add(trip);
+	  	pottyTrips.add(trip);
 
-	  	expect(service.trips()[0].isWee).toEqual(true);
-	  });
+	  	expect(pottyTrips.trips()[0].isWee).toEqual(true);
+	  }));
 
-	  it('added trips are copied', function(){
+	  it('added trips are copied', inject(function(pottyTrips){
 	  	trip.isPoo = true;
-	  	service.add(trip);
+	  	pottyTrips.add(trip);
 
 	  	trip.isPoo = false;
 
-	  	expect(service.trips()[0].isPoo).toEqual(true);
-	  });
+	  	expect(pottyTrips.trips()[0].isPoo).toEqual(true);
+	  }));
 
-	  it('trips are not added if no wee or poo', function(){
+	  it('trips are not added if no wee or poo', inject(function(pottyTrips){
 	  	trip.isWee = false;
 	  	trip.isPoo = false;
 
-	  	service.add(trip);
+	  	pottyTrips.add(trip);
 
-	    expect(service.trips().length).toEqual(0);
-	  });
+	    expect(pottyTrips.trips().length).toEqual(0);
+	  }));
 
-	  it('current timestamp set when trip added', function(){
+	  it('current timestamp set when trip added', inject(function(pottyTrips){
 	  	var now = new Date();
 	  	var nowPlusSecond = new Date(now.getTime() + 1000);
 	  	var nowMinusSecond = new Date(now.getTime() - 1000);
 
-	  	service.add(weeTrip());
+	  	pottyTrips.add(weeTrip());
 
-	  	expect(service.trips()[0].timestamp).toBeGreaterThan(nowMinusSecond);
-	  	expect(service.trips()[0].timestamp).toBeLessThan(nowPlusSecond);
-	  });
+	  	expect(pottyTrips.trips()[0].timestamp).toBeGreaterThan(nowMinusSecond);
+	  	expect(pottyTrips.trips()[0].timestamp).toBeLessThan(nowPlusSecond);
+	  }));
 
-	  it('records timestamp of last wee trip', function(){
+	  it('records timestamp of last wee trip', inject(function(pottyTrips){
 	  	var now = new Date();
-	  	addWeeTripWithTime(now);
+	  	addWeeTripWithTime(pottyTrips, now);
 
-	  	addPooTripWithTime(new Date(now.getTime() + 5000));
+	  	addPooTripWithTime(pottyTrips, new Date(now.getTime() + 5000));
 
 	  	var nowPlusTenSeconds = new Date(now.getTime() + 10000);
-	  	addWeeTripWithTime(nowPlusTenSeconds);
+	  	addWeeTripWithTime(pottyTrips, nowPlusTenSeconds);
 
-	  	var lastTrip = service.trips()[service.trips().length-1];
+	  	var lastTrip = pottyTrips.trips()[pottyTrips.trips().length-1];
 	  	expect(lastTrip.timestampOfPreviousWee).toEqual(now);
 	  	expect(lastTrip.timestampOfPreviousPoo).toEqual(undefined);
-	  });
+	  }));
 
-	  it('records timestamp of last poo trip', function(){
+	  it('records timestamp of last poo trip', inject(function(pottyTrips){
 	  	var now = new Date();
-	  	addPooTripWithTime(now);
+	  	addPooTripWithTime(pottyTrips, now);
 
-	  	addWeeTripWithTime(new Date(now.getTime() + 5000));
+	  	addWeeTripWithTime(pottyTrips, new Date(now.getTime() + 5000));
 
 	  	var nowPlusTenSeconds = new Date(now.getTime() + 10000);
-	  	addPooTripWithTime(nowPlusTenSeconds);
+	  	addPooTripWithTime(pottyTrips, nowPlusTenSeconds);
 
-	  	var lastTrip = service.trips()[service.trips().length-1];
+	  	var lastTrip = pottyTrips.trips()[pottyTrips.trips().length-1];
 	  	expect(lastTrip.timestampOfPreviousPoo).toEqual(now);
 	  	expect(lastTrip.timestampOfPreviousWee).toEqual(undefined);
-	  });
+	  }));
 	});
 });
