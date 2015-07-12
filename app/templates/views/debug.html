@@ -1,0 +1,22 @@
+<ion-view>
+    <ion-header-bar align-title="center" class="bar-positive">
+    <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
+        <h1 class="title">Debug</h1>
+    </ion-header-bar>
+
+    <ion-content>
+        <div class="list">
+
+            <!-- connect toggles to controller using ng-model -->
+
+            <div class="button-bar">
+              <a ng-click="resetTrips()" class="button button-full button-assertive" style="margin-top: 0px;margin-bottom: 0px" ui-sref="app.home" id="reset-trips">
+                <i class="icon ion-close"></i>
+                    Reset potty trips
+              </a>
+            </div>
+
+        </div>
+    </ion-content>
+
+</ion-view>

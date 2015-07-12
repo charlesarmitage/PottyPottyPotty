@@ -63,6 +63,16 @@ angular.module('PottyPottyPotty', ['angularMoment', 'ionic', 'ngCordova', 'ngRes
             controller: 'SettingsController'
           }
         }
+      })
+      .state('app.debug', {
+        url: '/debug',
+        cache: true,
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/debug.html',
+            controller: 'DebugController'
+          }
+        }
       });
 
 
