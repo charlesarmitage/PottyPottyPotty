@@ -58,8 +58,13 @@ angular.module('PottyPottyPotty')
         var newTrip = angular.copy(trip);
         updateTripTimes(newTrip);
         pottyTrips.push(newTrip);
-        // localstorage.setObject('potty-trips', pottyTrips);
+        localstorage.setObject('potty-trips', pottyTrips);
       }
+    }
+
+    function resetTrips(){
+      pottyTrips = [];
+      localstorage.setObject('potty-trips', pottyTrips);
     }
 
     function isValid(trip) {
@@ -75,6 +80,7 @@ angular.module('PottyPottyPotty')
       setTimeStamper : setTimeStamper,
   		trips : trips,
       add : add,
+      resetTrips : resetTrips,
       isValid: isValid
   	};
   });

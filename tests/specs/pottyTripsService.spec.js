@@ -68,8 +68,23 @@ describe("Potty Trips Service", function() {
 			expect(pottyTrips.trips()).toEqual(fakeTrips);
 		}));
 
-		// TODO: Saves trips on add
-		// TODO: User can delete local storage data from menu
+		it('saves all trips on add', inject(function(pottyTrips) {
+			pottyTrips.add( weeTrip() );
+			expect(mockLocalStorage.setObject).toHaveBeenCalledWith('potty-trips', pottyTrips.trips());
+		}));
+
+		it('saves all trips on reset', inject(function(pottyTrips) {
+			pottyTrips.resetTrips();
+			expect(mockLocalStorage.setObject).toHaveBeenCalledWith('potty-trips', []);
+		}));
+	});
+
+	describe('Resetting potty trips', function() {
+	  it('removes all trips', inject(function(pottyTrips) {
+	  	pottyTrips.add( weeTrip() );
+	  	pottyTrips.resetTrips();
+	    expect(pottyTrips.trips().length).toEqual(0);
+	  }));
 	});
 
 	describe('Adding a potty trip', function() {
