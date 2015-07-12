@@ -17,8 +17,9 @@ describe("Home Controller", function() {
 	}));
 
 	beforeEach(inject(function(_$controller_){
-
-	   $scope = {};
+	   $scope = {
+		   	$watch : function(expr,update) {}
+	   };
 	   function buildController(){
 	   		return _$controller_('HomeController', { $scope: $scope });
 	   };
