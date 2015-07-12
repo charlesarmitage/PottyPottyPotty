@@ -7,6 +7,9 @@ describe('Potty Potty Potty', function() {
 
   beforeEach(function() {
     browser.get('http://localhost:9000/#/app/home');
+    // TODO: Maybe the storage clearance should go in a global.spec.js file?
+    browser.executeScript('window.sessionStorage.clear();');
+    browser.executeScript('window.localStorage.clear();');
     browser.waitForAngular();
     var addTripButton = element(by.id('add-trip'));
     addTripButton.click();
