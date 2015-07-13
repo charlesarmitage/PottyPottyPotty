@@ -16,7 +16,7 @@ Note to fix a clash with the 'amateur packet radio node' program this package al
 `sudo npm cache clean -f && sudo npm install -g n && sudo ~/npm/bin/n stable`
 
 ### Install dependencies ###
-`sudo npm install -g cordova ionic`
+`sudo npm install -g cordova ionic gulp`
 `npm install`
   - If this fails with 'lock' errors do this `sudo chown -R $USER ~/.npm` and rerun it.
 `bower install`

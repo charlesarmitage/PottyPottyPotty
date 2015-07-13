@@ -23,6 +23,7 @@ before_script:
   # Install node modules
   - npm install -g cordova
   - npm install -g ionic
+  - npm install -g gulp
   - gem install sass
   # Install node modules listed in package.json
   - npm install
