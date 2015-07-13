@@ -20,7 +20,7 @@ before_script:
 
   # Install node 0.12 instead of the 0.10 default in Ubuntu
   - curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
-  - sudo apt-get install nodejs
+  - sudo apt-get install --yes nodejs
   # Install node modules
   - npm install -g cordova
   - npm install -g ionic
