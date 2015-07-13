@@ -6,6 +6,12 @@ Copyright 2015 Charles Armitage & Julian Churchill
 
 ## Build instructions
 
+### Installing nodejs on Ubuntu ###
+Note to fix a clash with the 'amateur packet radio node' program this package also updates the soft link /usr/bin/node to point to /etc/alternatives/node which points to /usr/bin/nodejs.
+
+`curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -`
+`sudo apt-get install nodejs`
+
 ### To update nodejs/npm ###
 `sudo npm cache clean -f && sudo npm install -g n && sudo ~/npm/bin/n stable`
 
