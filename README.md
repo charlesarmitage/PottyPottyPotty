@@ -18,6 +18,7 @@ Note to fix a clash with the 'amateur packet radio node' program this package al
 ### Install dependencies ###
 `sudo npm install -g cordova ionic`
 `npm install`
+  - If this fails with 'lock' errors do this `sudo chown -R $USER ~/.npm` and rerun it.
 `bower install`
 
 ### Install Sass ###
