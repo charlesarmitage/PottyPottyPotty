@@ -16,7 +16,9 @@ Note to fix a clash with the 'amateur packet radio node' program this package al
 `sudo npm cache clean -f && sudo npm install -g n && sudo ~/npm/bin/n stable`
 
 ### Install dependencies ###
-`npm install -g cordova ionic && npm install && bower install`
+`sudo npm install -g cordova ionic`
+`npm install`
+`bower install`
 
 ### Install Sass ###
 Install Sass gem for compiling Sass files:
