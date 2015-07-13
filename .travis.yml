@@ -18,11 +18,18 @@ before_script:
   # you are building for android (run "android list sdk --all --extended" to get the full list.
   - echo "y" | android update sdk --all --filter tools,platform-tools,build-tools-22.0.1,android-22 --no-ui --force
 
-  - npm install -g gulp cordova ionic
+  # Install node 0.12 instead of the 0.10 default in Ubuntu
+  - curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
+  - sudo apt-get install nodejs
+  # Install node modules
+  - npm install -g cordova
+  - npm install -g ionic
   - gem install sass
+  # Install node modules listed in package.json
   - npm install
+  # Install bower modules listed in bower.json
   - bower install
-script: 
+script:
   - gulp build -b
   - cordova platform add android
   - gulp build-android -b
