@@ -6,6 +6,9 @@ Copyright 2015 Charles Armitage & Julian Churchill
 
 ## Build instructions
 
+### To update nodejs/npm ###
+`sudo npm cache clean -f && sudo npm install -g n && sudo ~/npm/bin/n stable`
+
 ### Install dependencies ###
 `npm install -g cordova ionic && npm install && bower install`
 
