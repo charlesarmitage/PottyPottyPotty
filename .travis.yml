@@ -19,8 +19,12 @@ before_script:
   - echo "y" | android update sdk --all --filter tools,platform-tools,build-tools-22.0.1,android-22 --no-ui --force
 
   # Install node 0.12 instead of the 0.10 default in Ubuntu
-  - curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
-  - sudo apt-get install --yes nodejs
+  # - curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
+  # - sudo apt-get install --yes nodejs
+  # Use nvm to install and select version of nodejs
+  - nvm ls
+  - nvm install 0.12
+  - nvm use 0.12
   # Install node modules
   - npm install -g cordova
   - npm install -g ionic
