@@ -32,7 +32,7 @@ before_script:
 script:
   - gulp build -b
   - cordova platform add android
-  - gulp build-android -b
+  - gulp build-android-no-gradle-daemon -b
   - gulp unittest
 
 before_deploy:

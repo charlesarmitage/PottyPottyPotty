@@ -379,7 +379,43 @@ gulp.task('build', function(done){
     done);
 });
 
+gulp.task('remove-enable-gradle-daemon-hook', function(done) {
+  return del(['hooks/after_prepare/020_enable_gradle_daemon_conditional.js'], done);
+});
+
+gulp.task('copy-enable-gradle-daemon-hook', function() {
+  return gulp.src('hooks/after_prepare_conditional/020_enable_gradle_daemon_conditional.js')
+    .pipe(gulp.dest('hooks/after_prepare'))
+    .on('error', errorHandler);
+});
+
+gulp.task('remove-disable-gradle-daemon-hook', function(done) {
+  return del(['hooks/after_prepare/020_disable_gradle_daemon_conditional.js'], done);
+});
+
+gulp.task('copy-disable-gradle-daemon-hook', function() {
+  return gulp.src('hooks/after_prepare_conditional/020_disable_gradle_daemon_conditional.js')
+    .pipe(gulp.dest('hooks/after_prepare'))
+    .on('error', errorHandler);
+});
+
+gulp.task('build-android-no-gradle-daemon', function(done) {
+  runSequence(
+    'remove-enable-gradle-daemon-hook',
+    'copy-disable-gradle-daemon-hook',
+    'build-android-common',
+    done);
+});
+
 gulp.task('build-android', function(done) {
+  runSequence(
+    'remove-disable-gradle-daemon-hook',
+    'copy-enable-gradle-daemon-hook',
+    'build-android-common',
+    done);
+});
+
+gulp.task('build-android-common', function(done) {
   // always build to www for android
   targetDir = path.resolve('www');
   runSequence(
