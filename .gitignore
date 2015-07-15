@@ -7,6 +7,8 @@ node_modules/
 # phonegap / cordova code
 platforms/
 plugins/
+# hooks dynamically selected by gulp at build time
+hooks/after_prepare/*_conditional.js
 
 # bower modules
 bower_components/
