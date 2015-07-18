@@ -399,7 +399,43 @@ gulp.task('copy-disable-gradle-daemon-hook', function() {
     .on('error', errorHandler);
 });
 
+gulp.task('remove-enable-publish-hook', function(done) {
+  return del(['hooks/after_prepare/030_enable_gradle_publish_tasks.js'], done);
+});
+
+gulp.task('copy-enable-publish-hook', function() {
+  return gulp.src('hooks/after_prepare_conditional/030_enable_gradle_publish_tasks.js')
+    .pipe(gulp.dest('hooks/after_prepare'))
+    .on('error', errorHandler);
+});
+
+gulp.task('remove-disable-publish-hook', function(done) {
+  return del(['hooks/after_prepare/030_disable_gradle_publish_tasks.js'], done);
+});
+
+gulp.task('copy-disable-publish-hook', function() {
+  return gulp.src('hooks/after_prepare_conditional/030_disable_gradle_publish_tasks.js')
+    .pipe(gulp.dest('hooks/after_prepare'))
+    .on('error', errorHandler);
+});
+
+gulp.task('build-android-and-publish', function(done) {
+  runSequence(
+    'remove-disable-publish-hook',
+    'copy-enable-publish-hook',
+    'build-android-no-gradle-daemon-common',
+    done);
+});
+
 gulp.task('build-android-no-gradle-daemon', function(done) {
+  runSequence(
+    'remove-enable-publish-hook',
+    'copy-disable-publish-hook',
+    'build-android-no-gradle-daemon-common',
+    done);
+});
+
+gulp.task('build-android-no-gradle-daemon-common', function(done) {
   runSequence(
     'remove-enable-gradle-daemon-hook',
     'copy-disable-gradle-daemon-hook',
@@ -409,6 +445,8 @@ gulp.task('build-android-no-gradle-daemon', function(done) {
 
 gulp.task('build-android', function(done) {
   runSequence(
+    'remove-enable-publish-hook',
+    'copy-disable-publish-hook',
     'remove-disable-gradle-daemon-hook',
     'copy-enable-gradle-daemon-hook',
     'build-android-common',
