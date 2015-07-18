@@ -37,15 +37,15 @@ var emulate = args.emulate;
 var run = args.run;
 var port = args.port;
 var stripDebug = !!args.stripDebug;
-var targetDir = path.resolve(build ? 'www' : '.tmp');
+var targetDir = path.resolve('www');
 
 // if we just use emualate or run without specifying platform, we assume iOS
 // in this case the value returned from yargs would just be true
 if (emulate === true) {
-    emulate = 'ios';
+    emulate = 'android';
 }
 if (run === true) {
-    run = 'ios';
+    run = 'android';
 }
 
 // global error handler
@@ -61,8 +61,7 @@ var errorHandler = function(error) {
 
 // clean target dir
 gulp.task('clean', function(done) {
-  // Clean should always clean all target dirs
-  del(['www','.tmp'], done);
+  del(['www'], done);
 });
 
 // precompile .scss and concat with ionic.css
@@ -276,11 +275,6 @@ gulp.task('splash', plugins.shell.task([
 ]));
 gulp.task('resources', plugins.shell.task([
   'ionic resources'
-]));
-
-// select emulator device
-gulp.task('select', plugins.shell.task([
-  './helpers/emulateios'
 ]));
 
 // ripple emulator
