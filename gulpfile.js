@@ -37,15 +37,15 @@ var emulate = args.emulate;
 var run = args.run;
 var port = args.port;
 var stripDebug = !!args.stripDebug;
-var targetDir = path.resolve('www');
+var targetDir = path.resolve(build ? 'www' : '.tmp');
 
 // if we just use emualate or run without specifying platform, we assume iOS
 // in this case the value returned from yargs would just be true
 if (emulate === true) {
-    emulate = 'android';
+    emulate = 'ios';
 }
 if (run === true) {
-    run = 'android';
+    run = 'ios';
 }
 
 // global error handler
@@ -61,7 +61,8 @@ var errorHandler = function(error) {
 
 // clean target dir
 gulp.task('clean', function(done) {
-  del(['www'], done);
+  // Clean should always clean all target dirs
+  del(['www','.tmp'], done);
 });
 
 // precompile .scss and concat with ionic.css
@@ -277,6 +278,11 @@ gulp.task('resources', plugins.shell.task([
   'ionic resources'
 ]));
 
+// select emulator device
+gulp.task('select', plugins.shell.task([
+  './helpers/emulateios'
+]));
+
 // ripple emulator
 gulp.task('ripple', ['scripts', 'styles', 'watchers'], function() {
 
@@ -394,21 +400,21 @@ gulp.task('copy-disable-gradle-daemon-hook', function() {
 });
 
 gulp.task('remove-enable-publish-hook', function(done) {
-  return del(['hooks/after_prepare/030_enable_gradle_publish_tasks.js'], done);
+  return del(['hooks/after_prepare/030_enable_gradle_publish_tasks_conditional.js'], done);
 });
 
 gulp.task('copy-enable-publish-hook', function() {
-  return gulp.src('hooks/after_prepare_conditional/030_enable_gradle_publish_tasks.js')
+  return gulp.src('hooks/after_prepare_conditional/030_enable_gradle_publish_tasks_conditional.js')
     .pipe(gulp.dest('hooks/after_prepare'))
     .on('error', errorHandler);
 });
 
 gulp.task('remove-disable-publish-hook', function(done) {
-  return del(['hooks/after_prepare/030_disable_gradle_publish_tasks.js'], done);
+  return del(['hooks/after_prepare/030_disable_gradle_publish_tasks_conditional.js'], done);
 });
 
 gulp.task('copy-disable-publish-hook', function() {
-  return gulp.src('hooks/after_prepare_conditional/030_disable_gradle_publish_tasks.js')
+  return gulp.src('hooks/after_prepare_conditional/030_disable_gradle_publish_tasks_conditional.js')
     .pipe(gulp.dest('hooks/after_prepare'))
     .on('error', errorHandler);
 });
