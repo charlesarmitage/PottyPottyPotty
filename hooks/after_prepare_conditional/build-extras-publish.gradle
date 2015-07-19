@@ -1,14 +1,9 @@
-buildscript {
-
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        // ...
-        classpath 'com.github.triplet.gradle:play-publisher:1.1.2'
-    }
-}
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.triplet.play'
+
+play {
+    serviceAccountEmail = 'your-service-account-email'
+    pk12File = file('key.p12')
+    track = 'alpha'  // or 'beta' or 'production'
+}
