@@ -32,11 +32,14 @@ before_script:
 script:
   - gulp build -b
   - cordova platform add android
-  - gulp build-android-no-gradle-daemon -b
+  # Either try to build with gradle but without the gradle daemon, works intermittently
+  #- gulp build-android-no-gradle-daemon -b
+  # Or build with ant, old skool
+  - ANDROID_BUILD=ant gulp build-android && cp platforms/android/bin/MainActivity-debug.apk platforms/android/build/outputs/apk/android-debug.apk
   - gulp unittest
 
 before_deploy:
-  # Deploy apk - todo: add this copy to gulpfile for build-android
+  # Deploy apk - todo: add this copy to gulpfile for build-android (but not if we're doing ant builds!)
   - mkdir -p builds/android
   - cp platforms/android/build/outputs/apk/android-debug.apk builds/android/pottypottypotty-debug.apk
 
