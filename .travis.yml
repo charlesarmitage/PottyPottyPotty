@@ -55,5 +55,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-  on:
     repo: charlesarmitage/PottyPottyPotty
