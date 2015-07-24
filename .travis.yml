@@ -10,24 +10,22 @@ sudo: false
 install:
   # Use nvm to install and select version 0.12 of nodejs instead of the default 0.10
   - nvm install 0.12
-  # Install node modules
   - npm install -g cordova
   - npm install -g ionic
   - npm install -g gulp
   - gem install sass
-  # Install node modules listed in package.json
   - npm install
-  # Install bower modules listed in bower.json
   - bower install
 
 script:
   - gulp build -b
+  - gulp unittest
+
   - cordova platform add android
   # Either try to build with gradle but without the gradle daemon, works intermittently
   #- gulp build-android-no-gradle-daemon -b
   # Or build with ant, old skool
   - ANDROID_BUILD=ant gulp build-android && mkdir -p platforms/android/build/outputs/apk && cp platforms/android/bin/MainActivity-debug.apk platforms/android/build/outputs/apk/android-debug.apk
-  - gulp unittest
 
 before_deploy:
   # Deploy apk - todo: add this copy to gulpfile for build-android (but not if we're doing ant builds!)
