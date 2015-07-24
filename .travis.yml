@@ -1,13 +1,5 @@
 language: java
 before_script:
-  # Deployment sometimes getting tags wrong suggested workaround below. See: https://github.com/travis-ci/travis-ci/issues/2510
-  # Although expect bug to have been fixed
-  - git fetch --tags
-
-  # Update Gradle properties first as it seems to restart the build
-  - mkdir ~/.gradle
-  - cp gradle.properties ~/.gradle
-
   # Install base Android SDK
   - sudo apt-get update -qq
   # Ensure 32-bit support libs are available if running on 64-bit architecture
