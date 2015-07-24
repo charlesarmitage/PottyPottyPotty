@@ -355,7 +355,6 @@ gulp.task('watchers', function() {
     .on('error', errorHandler);
 });
 
-// no-op = empty function
 gulp.task('noop', function() {});
 
 gulp.task('build', function(done){
@@ -448,8 +447,6 @@ gulp.task('build-android', function(done) {
 });
 
 gulp.task('build-android-common', function(done) {
-  // always build to www for android
-  targetDir = path.resolve('www');
   runSequence(
     'build',
     'ionic:build-android',
