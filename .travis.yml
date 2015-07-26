@@ -20,6 +20,7 @@ install:
 script:
   - gulp build -b
   - gulp unittest
+  - gulp e2e-tests-headless
 
   - cordova platform add android
   # Either try to build with gradle but without the gradle daemon, works intermittently

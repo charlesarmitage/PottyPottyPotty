@@ -43,6 +43,7 @@
     "lodash": "^3.0.0",
     "merge-stream": "^0.1.7",
     "open": "0.0.5",
+    "phantomjs": "^1.9.17",
     "ripple-emulator": "^0.9.28",
     "run-sequence": "^1.0.2",
     "shelljs": "^0.3.0",
