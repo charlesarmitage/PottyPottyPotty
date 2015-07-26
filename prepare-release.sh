@@ -8,18 +8,22 @@ if [ -z $1 ]; then
     fi
 KEY_PASS=$1
 
+KEYSTORE=~/dev/keys/pottypottypotty-release.keystore
+UNSIGNED_APK=builds/android/pottypottypotty-release-unsigned.apk
+SIGNED_APK=builds/android/pottypottypotty.apk
+
 echo "Sign apk"
 
 jarsigner \
 	-sigalg SHA1withRSA \
 	-digestalg SHA1 \
-	-keystore pottypottypotty-release.keystore \
-	PottyPottyPotty-release-unsigned.apk \
+	-keystore $KEYSTORE \
+	$UNSIGNED_APK \
 	pottypottypotty \
 	--storepass $1
 
 echo "Zip align apk"
 
-~/Android/Sdk/build-tools/22.0.1/zipalign 4 PottyPottyPotty-release-unsigned.apk PottyPottyPotty.apk
+~/Android/Sdk/build-tools/22.0.1/zipalign 4 $UNSIGNED_APK $SIGNED_APK
 
 echo "Done"
