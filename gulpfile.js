@@ -342,7 +342,6 @@ gulp.task('protractor-tests-headless', make_protractor_runner('tests/e2e/headles
 gulp.task('e2e-tests', ['build'], function(done){
   runSequence(
     'serve',
-    'show-app',
     'protractor-tests',
     'stop-serve',
     done
