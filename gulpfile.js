@@ -237,11 +237,14 @@ gulp.task('index', ['jsHint', 'scripts'], function() {
 var expressServer = null;
 
 gulp.task('serve', function() {
-    expressServer =
+  expressServer =
     express()
     .use(!build ? connectLr() : function(){})
     .use(express.static(targetDir))
     .listen(port);
+});
+
+gulp.task('show-app', function() {
   open('http://localhost:' + port + '/');
 });
 
@@ -319,21 +322,36 @@ gulp.task('karma-watch', function() {
 });
 
 // e2e testing
-gulp.task('protractor-tests', function(){
-  return gulp.src(['./src/tests/*.js'])
-      .pipe(angularProtractor({
-          'configFile': 'tests/e2e/conf.js',
-          'args': ['--baseUrl', 'http://127.0.0.1:8000'],
-          'autoStartStopServer': true,
-          'debug': true
-      }))
-      .on('error', function(e) { throw e });
-})
+function make_protractor_runner(configFile){
+  return function(){
+    return gulp.src(['./src/tests/*.js'])
+        .pipe(angularProtractor({
+            'configFile': configFile,
+            'args': ['--baseUrl', 'http://127.0.0.1:8000'],
+            'autoStartStopServer': true,
+            'debug': true
+        }))
+        .on('error', function(e) { throw e });
+  };
+};
+
+gulp.task('protractor-tests', make_protractor_runner('tests/e2e/conf.js'));
+
+gulp.task('protractor-tests-headless', make_protractor_runner('tests/e2e/headless-conf.js'));
 
 gulp.task('e2e-tests', ['build'], function(done){
   runSequence(
     'serve',
     'protractor-tests',
+    'stop-serve',
+    done
+    );
+});
+
+gulp.task('e2e-tests-headless', ['build'], function(done){
+  runSequence(
+    'serve',
+    'protractor-tests-headless',
     'stop-serve',
     done
     );
@@ -468,6 +486,7 @@ gulp.task('default', function(done) {
     'index',
     build ? 'noop' : 'watchers',
     build ? 'noop' : 'serve',
+    build ? 'noop' : 'show-app',
     'karma-watch',
     emulate ? ['ionic:emulate', 'watchers'] : 'noop',
     run ? 'ionic:run' : 'noop',
