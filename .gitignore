@@ -24,3 +24,9 @@ www/
 
 *.DS_Store
 *.log
+
+# Keystores
+*.keystore
+
+# Build output dir
+builds/
