@@ -14,9 +14,7 @@
             </ion-item>
             <ion-item ng-repeat="trip in pottyTrips | orderBy:'-timestamp'">
             <!-- TODO: Improve presentation. Supply text from controller -->
-            <span ng-show="trip.isWee">Wee</span>
-            <span ng-show="trip.isWee && trip.isPoo"> & </span>
-            <span ng-show="trip.isPoo">Poo</span>
+            <span>{{::trip.typeText}}</span>
             <span><br/>{{::trip.timestamp | date:'HH:mm:ss'}}</span>
             <span ng-show="trip.timestampOfPreviousWee"><br/>Time since last wee was {{::trip.previousWeeText}}</span>
             <span ng-show="trip.timestampOfPreviousPoo"><br/>Time since last poo was {{::trip.previousPooText}}</span>
