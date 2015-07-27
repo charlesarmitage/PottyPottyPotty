@@ -62,6 +62,10 @@ angular.module('PottyPottyPotty')
       }
     }
 
+    function setTrips(trips){
+      pottyTrips = angular.copy(trips);
+    }
+
     function resetTrips(){
       pottyTrips = [];
       localstorage.setObject('potty-trips', pottyTrips);
@@ -80,6 +84,7 @@ angular.module('PottyPottyPotty')
       setTimeStamper : setTimeStamper,
   		trips : trips,
       add : add,
+      setTrips : setTrips,
       resetTrips : resetTrips,
       isValid: isValid
   	};

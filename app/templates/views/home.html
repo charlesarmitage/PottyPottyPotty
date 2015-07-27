@@ -17,14 +17,9 @@
             <span ng-show="trip.isWee">Wee</span>
             <span ng-show="trip.isWee && trip.isPoo"> & </span>
             <span ng-show="trip.isPoo">Poo</span>
-            <br/>
-            <span>{{trip.timestamp | date:'HH:mm:ss'}}</span>
-            <span ng-show="trip.timestampOfPreviousWee"><br/></span>
-            <span ng-show="trip.timestampOfPreviousWee">Time since last wee was {{trip.timestamp | amDifference : trip.timestampOfPreviousWee : 'minutes' }} <ng-pluralize count="{{trip.timestamp | amDifference : trip.timestampOfPreviousWee : 'minutes' }}"
-                 when="{'0': 'minutes', '1': 'minute', 'other': 'minutes'}"></ng-pluralize></span>
-            <span ng-show="trip.timestampOfPreviousPoo"><br/></span>
-            <span ng-show="trip.timestampOfPreviousPoo">Time since last poo was {{trip.timestamp | amDifference : trip.timestampOfPreviousPoo : 'minutes' }} <ng-pluralize count="{{trip.timestamp | amDifference : trip.timestampOfPreviousPoo : 'minutes' }}"
-                 when="{'0': 'minutes', '1': 'minute', 'other': 'minutes'}"></ng-pluralize></span>
+            <span><br/>{{::trip.timestamp | date:'HH:mm:ss'}}</span>
+            <span ng-show="trip.timestampOfPreviousWee"><br/>Time since last wee was {{::trip.previousWeeText}}</span>
+            <span ng-show="trip.timestampOfPreviousPoo"><br/>Time since last poo was {{::trip.previousPooText}}</span>
             </ion-item>
         </ion-list>
     </ion-content>
