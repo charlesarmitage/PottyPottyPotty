@@ -30,3 +30,6 @@ www/
 
 # Build output dir
 builds/
+
+# Temp scripts for testing automation
+test.sh
