@@ -5,9 +5,9 @@ angular.module('PottyPottyPotty')
     $scope.pottyTrips = [];
 
     $scope.loadPagedPottyTrips = function(){
-        $scope.pottyTrips = pottyTrips.trips();
-        for (var i = 0; i < $scope.pottyTrips.length; i++) {
-            var trip = $scope.pottyTrips[i];
+        var trips = pottyTrips.trips();
+        for (var i = 0; i < trips.length; i++) {
+            var trip = trips[i];
             trip.typeText = '';
             if( trip.isWee && trip.isPoo ) {
                 trip.typeText = 'Wee & Poo';
@@ -29,10 +29,11 @@ angular.module('PottyPottyPotty')
                 trip.previousPooText += ' minutes';
             }
         }
+        $scope.pottyTrips = trips;
     };
     $scope.loadPagedPottyTrips();
 
-    $scope.$watch(function () { return pottyTrips.trips(); }, function (newVal, oldVal) {
+    $scope.$watchCollection(function () { return pottyTrips.trips(); }, function (newVal, oldVal) {
         if (newVal !== oldVal) {
             $scope.loadPagedPottyTrips();
         }
