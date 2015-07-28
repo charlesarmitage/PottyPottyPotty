@@ -28,6 +28,9 @@ www/
 # Keystores
 *.keystore
 
+# Play Store user file
+GooglePlayAndroidDeveloper-4d336e73004e.json
+
 # Build output dir
 builds/
 
