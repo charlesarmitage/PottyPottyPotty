@@ -3,7 +3,14 @@
 angular.module('PottyPottyPotty')
   .factory('pottyTrips', function(localstorage) {
 
-  	var pottyTrips = angular.copy(localstorage.getObject('potty-trips', []));
+    var convertDateStringsToObjects = function(trips){
+      for (var i = 0; i < trips.length; i++) {
+        trips[i].timestamp = new Date(trips[i].timestamp);
+      }
+      return trips;
+    };
+
+  	var pottyTrips = angular.copy(convertDateStringsToObjects(localstorage.getObject('potty-trips', [])));
 
     var timeStamper = function(){
       return new Date();
@@ -62,6 +69,10 @@ angular.module('PottyPottyPotty')
       }
     }
 
+    function setTrips(trips){
+      pottyTrips = angular.copy(trips);
+    }
+
     function resetTrips(){
       pottyTrips = [];
       localstorage.setObject('potty-trips', pottyTrips);
@@ -80,6 +91,7 @@ angular.module('PottyPottyPotty')
       setTimeStamper : setTimeStamper,
   		trips : trips,
       add : add,
+      setTrips : setTrips,
       resetTrips : resetTrips,
       isValid: isValid
   	};

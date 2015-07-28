@@ -30,14 +30,16 @@ describe("Potty Trips Service", function() {
 	function weeTrip(){
 		return {
 			isWee : true,
-			isPoo : false
+			isPoo : false,
+			timestamp: "2015-07-28T20:12:29.291Z"
 		}
 	};
 
 	function pooTrip(){
 		return {
 			isWee : false,
-			isPoo : true
+			isPoo : true,
+			timestamp: "2015-07-28T20:12:29.291Z"
 		}
 	};
 
