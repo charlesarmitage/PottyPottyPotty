@@ -8,7 +8,7 @@ if [ -z $1 ]; then
     fi
 KEY_PASS=$1
 
-KEYSTORE=~/dev/keys/pottypottypotty-release.keystore
+KEYSTORE=pottypottypotty-release.keystore
 UNSIGNED_APK=builds/android/pottypottypotty-release-unsigned.apk
 SIGNED_APK=builds/android/pottypottypotty.apk
 
