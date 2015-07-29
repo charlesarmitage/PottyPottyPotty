@@ -36,13 +36,15 @@ script:
   # Either try to build with gradle but without the gradle daemon, works intermittently
   #- gulp build-android-no-gradle-daemon -b
   # Or build with ant, old skool
-  - ANDROID_BUILD=ant gulp build-android && mkdir -p platforms/android/build/outputs/apk && cp platforms/android/bin/MainActivity-debug.apk platforms/android/build/outputs/apk/android-debug.apk
+  - ANDROID_BUILD=ant cordova build --release android
+  - mkdir -p builds/android
+  - cp platforms/android/ant-build/MainActivity-release-unsigned.apk builds/android/pottypottypotty-release-unsigned.apk
 
 before_deploy:
   # Deploy apk - todo: add this copy to gulpfile for build-android (but not if we're doing ant builds!)
   # Sign build with KEY_PASS env variable
-  - mkdir -p builds/android
-  - cp platforms/android/build/outputs/apk/android-debug.apk builds/android/pottypottypotty-debug.apk
+  # - mkdir -p builds/android
+  # - cp platforms/android/build/outputs/apk/android-debug.apk builds/android/pottypottypotty-debug.apk
 
 deploy:
   provider: releases
