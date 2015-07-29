@@ -25,6 +25,9 @@ www/
 *.DS_Store
 *.log
 
+# Travis encrypted files
+secrets.tar
+
 # Keystores
 *.keystore
 

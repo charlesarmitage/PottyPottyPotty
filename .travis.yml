@@ -8,8 +8,8 @@ android:
 sudo: false
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_9388caed6534_key -iv $encrypted_9388caed6534_iv -in pottypottypotty-release.keystore.enc -out pottypottypotty-release.keystore -d
-  - openssl aes-256-cbc -K $encrypted_9388caed6534_key -iv $encrypted_9388caed6534_iv -in GooglePlayAndroidDeveloper-4d336e73004e.json.enc -out GooglePlayAndroidDeveloper-4d336e73004e.json -d
+  - openssl aes-256-cbc -K $encrypted_9388caed6534_key -iv $encrypted_9388caed6534_iv -in secrets.tar.enc -out secrets.tar -d
+  - tar -xvf secrets.tar
 
 install:
   # Use nvm to install and select version 0.12 of nodejs instead of the default 0.10
