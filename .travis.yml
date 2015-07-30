@@ -43,6 +43,9 @@ script:
   - jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore pottypottypotty-release.keystore builds/android/pottypottypotty-release-unsigned.apk pottypottypotty --storepass $KEY_PASS
   # Zip align build
   - $ANDROID_HOME/build-tools/22.0.1/zipalign 4 builds/android/pottypottypotty-release-unsigned.apk builds/android/pottypottypotty.apk
+  # Upload to play store - TODO: Move to deploy script
+  # TODO: Change version number dependent on tag
+  - upload_to_play_store.py -p com.cjra.pottypottypotty -a builds/android/pottypottypotty.apk -s GooglePlayAndroidDeveloper-4d336e73004e.json
 
 before_deploy:
   # Deploy apk - todo: add this copy to gulpfile for build-android (but not if we're doing ant builds!)
