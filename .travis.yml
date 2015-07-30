@@ -25,6 +25,7 @@ install:
   - npm install
   - bower install
   # TODO: Move to before_deploy once proven that this command works on Travis
+  - pip install --user PyOpenSSL
   - pip install --user --upgrade google-api-python-client
 
 script:
