@@ -41,6 +41,8 @@ script:
   - cp platforms/android/bin/MainActivity-release-unsigned.apk builds/android/pottypottypotty-release-unsigned.apk
   # Sign build
   - jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore pottypottypotty-release.keystore builds/android/pottypottypotty-release-unsigned.apk pottypottypotty --storepass $KEY_PASS
+  # Zip align build
+  - $ANDROID_HOME/build-tools/22.0.1/zipalign 4 builds/android/pottypottypotty-release-unsigned.apk builds/android/pottypottypotty.apk
 
 before_deploy:
   # Deploy apk - todo: add this copy to gulpfile for build-android (but not if we're doing ant builds!)
