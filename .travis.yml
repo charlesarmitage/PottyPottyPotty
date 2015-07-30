@@ -39,6 +39,8 @@ script:
   - ANDROID_BUILD=ant cordova build --release android
   - mkdir -p builds/android
   - cp platforms/android/bin/MainActivity-release-unsigned.apk builds/android/pottypottypotty-release-unsigned.apk
+  # Sign build
+  - jarsigner -sigalg SHA1withRSA -digestalg SHA1 -keystore pottypottypotty-release.keystore builds/android/pottypottypotty-release-unsigned.apk pottypottypotty --storepass $KEY_PASS
 
 before_deploy:
   # Deploy apk - todo: add this copy to gulpfile for build-android (but not if we're doing ant builds!)
