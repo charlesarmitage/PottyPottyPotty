@@ -38,7 +38,8 @@ script:
   # Either try to build with gradle but without the gradle daemon, works intermittently
   #- gulp build-android-no-gradle-daemon -b
   # Or build with ant, old skool
-  - ANDROID_BUILD=ant cordova build --release android
+  #- ANDROID_BUILD=ant cordova build --release android
+  - cordova build --release android -- --gradleArg=--no-deamon
   - mkdir -p builds/android
   - cp platforms/android/bin/MainActivity-release-unsigned.apk builds/android/pottypottypotty-release-unsigned.apk
   # Sign build
