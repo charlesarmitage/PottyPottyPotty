@@ -64,6 +64,15 @@ angular.module('PottyPottyPotty', ['angularMoment', 'ionic', 'ngCordova', 'ngRes
           }
         }
       })
+      .state('app.about', {
+        url: '/about',
+        cache: true,
+        views: {
+          'viewContent': {
+            templateUrl: 'templates/views/about.html'
+          }
+        }
+      })
       .state('app.debug', {
         url: '/debug',
         cache: true,
@@ -74,7 +83,6 @@ angular.module('PottyPottyPotty', ['angularMoment', 'ionic', 'ngCordova', 'ngRes
           }
         }
       });
-
 
     // redirects to default route for undefined routes
     $urlRouterProvider.otherwise('/app/home');
