@@ -69,7 +69,8 @@ angular.module('PottyPottyPotty', ['angularMoment', 'ionic', 'ngCordova', 'ngRes
         cache: true,
         views: {
           'viewContent': {
-            templateUrl: 'templates/views/about.html'
+            templateUrl: 'templates/views/about.html',
+            controller: 'AboutController'
           }
         }
       })
