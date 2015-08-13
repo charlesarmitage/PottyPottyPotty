@@ -23,16 +23,12 @@ install:
   - npm install -g ionic
   - npm install -g gulp
   - gem install sass
-  - npm install
-  - bower install
+  - ./install-dependencies.sh
 
 script:
-  - gulp build -b
+  - gulp build
   - gulp unittest
   - gulp e2e-tests-headless
-
-  - cordova platform add android
-  - cordova plugin add https://github.com/whiteoctober/cordova-plugin-app-version.git
 
   # Either try to build with gradle but without the gradle daemon, works intermittently
   #- gulp build-android-no-gradle-daemon -b

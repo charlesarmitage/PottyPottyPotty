@@ -7,7 +7,8 @@ Copyright 2015 Charles Armitage & Julian Churchill
 ## Build instructions
 
 ### Installing nodejs on Ubuntu ###
-Note to fix a clash with the 'amateur packet radio node' program this package also updates the soft link /usr/bin/node to point to /etc/alternatives/node which points to /usr/bin/nodejs.
+Note to fix a clash with the 'amateur packet radio node' program this package also updates
+ the soft link /usr/bin/node to point to /etc/alternatives/node which points to /usr/bin/nodejs.
 
 `curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -`
 `sudo apt-get install nodejs`
@@ -17,9 +18,11 @@ Note to fix a clash with the 'amateur packet radio node' program this package al
 
 ### Install dependencies ###
 `sudo npm install -g cordova ionic gulp`
+
 `./install-dependencies.sh`
 
-  - If 'npm install' fails with 'lock' errors do this `sudo chown -R $USER ~/.npm` and rerun it.
+  This runs `npm install`, `bower install` and adds the cordova dependencies (see below).
+  If 'npm install' fails with 'lock' errors do this `sudo chown -R $USER ~/.npm` and rerun it.
 
 ### Install Sass ###
 Install Sass gem for compiling Sass files:
@@ -31,7 +34,10 @@ Install Sass gem for compiling Sass files:
 
 ## Gulp tasks
 
-- Run default actions. Clean, build, use karma to run jasmine tests, display results in a browser and watch for changes. Also start app in a browser with 'express', watch for changes, rebuild and restart automatically. This task is recommended as it will ensure all source is rebuilt correctly and tests are rerun.
+- Run default actions. Clean, build, use karma to run jasmine tests, display results in a browser
+ and watch for changes. Also start app in a browser with 'express', watch for changes, rebuild and
+  restart automatically. This task is recommended as it will ensure all source is rebuilt correctly
+   and tests are rerun.
  - `gulp`
 - Find out all available gulp tasks
  - `gulp -T`
@@ -47,11 +53,14 @@ Install Sass gem for compiling Sass files:
 - Build a phonegap app
  - `gulp build-android`
   - To build with ant instead of gradle (i.e. on Travis where the gradle daemon keeps dying) run `ANDROID_BUILD=ant gulp build-android`
-  - If you get the error "Current working directory is not a Cordova-based project" then run `gulp -b` to create the www directory then re-run `gulp build-android`.
+  - If you get the error "Current working directory is not a Cordova-based project" then run `gulp -b` to 
+  create the www directory then re-run `gulp build-android`.
 - Build and start a phonegap app in the emulator
  - 'gulp --run android'
-  - Before running this for the first time you may have to run 'cordova platform add android' and possibly run the android SDK manager to install a suitable SDK version.
-  - If the app does not start/install on the emulator then you will need to manually install it with 'adb install <apk_path>'. Subsequent calls to 'gulp --run android' should start the app from then on.
+  - Before running this for the first time you may have to run 'cordova platform add android' and possibly
+   run the android SDK manager to install a suitable SDK version.
+  - If the app does not start/install on the emulator then you will need to manually install it with 
+  'adb install <apk_path>'. Subsequent calls to 'gulp --run android' should start the app from then on.
   - If you have further problems please review the 'notes' section below
 
 ## Building for Android
