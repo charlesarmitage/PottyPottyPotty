@@ -17,19 +17,17 @@ Note to fix a clash with the 'amateur packet radio node' program this package al
 
 ### Install dependencies ###
 `sudo npm install -g cordova ionic gulp`
-`npm install`
-  - If this fails with 'lock' errors do this `sudo chown -R $USER ~/.npm` and rerun it.
-`bower install`
+`./install-dependencies.sh`
+
+  - If 'npm install' fails with 'lock' errors do this `sudo chown -R $USER ~/.npm` and rerun it.
 
 ### Install Sass ###
 Install Sass gem for compiling Sass files:
 `gem install sass`
 
 ### Run app in browser for development ###
-- Build and unit test, run app in browser, watch for changes.
+- Build and unit test, run app in browser, watch for changes. (Also runs karma/jasmine unit tests)
  - `gulp`
-
-(Also runs karma/jasmine unit tests)
 
 ## Gulp tasks
 
@@ -55,6 +53,23 @@ Install Sass gem for compiling Sass files:
   - Before running this for the first time you may have to run 'cordova platform add android' and possibly run the android SDK manager to install a suitable SDK version.
   - If the app does not start/install on the emulator then you will need to manually install it with 'adb install <apk_path>'. Subsequent calls to 'gulp --run android' should start the app from then on.
   - If you have further problems please review the 'notes' section below
+
+## Building for Android
+
+Run:
+`cordova build android`
+
+Dependencies:
+'./install-dependencies.sh' installs the following:
+  - Android platform (cordova platform add android)
+  - Cordova AppVersion Plugin (https://github.com/whiteoctober/cordova-plugin-app-version)
+
+## Travis
+
+Travis build at: https://travis-ci.org/charlesarmitage/PottyPottyPotty
+
+Deploys artifacts to GitHub 'tags': http://docs.travis-ci.com/user/deployment/releases/
+and into the Google Play Store alpha track.
 
 ## Status
 
@@ -87,20 +102,6 @@ contain more details about the available tasks and the options for running the a
       - I discovered this referred to javac - 51 => Java 7, 50 => Java 6. I had previously set java 7 to be the default with 'sudo update-alternatives --config java' but this only set 'java'. To set 'javac' you have to 'sudo update-alternatives --config javac' and select a Java 7 compiler (I chose the OpenJDK to match the Java runtime environment). I also did 'rm -rf platforms/android ; cordova add platform android' to force it to recompile everything afresh.
 
     - App appears to build and install correctly but I still cannot find it on the emulator.
-
-## Building for Android
-
-Add Android platform to project directory:
-`cordova platform add android`
-
-Build Ionic app:
-`ionic build android`
-
-## Travis
-
-Travis build at: https://travis-ci.org/charlesarmitage/PottyPottyPotty
-
-Deploying artifacts to GitHub 'tags?': http://docs.travis-ci.com/user/deployment/releases/
 
 ### Travis CLI
 
