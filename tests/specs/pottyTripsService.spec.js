@@ -166,4 +166,69 @@ describe("Potty Trips Service", function() {
 	  	expect(lastTrip.timestampOfPreviousWee).toEqual(undefined);
 	  }));
 	});
+
+	describe('Removing a potty trip', function(){
+		
+	  it('ignores remove request if trip list is empty', inject(function(pottyTrips){
+	  	var trip = weeTrip();
+	  	trip.timestamp = new Date(Date.now());
+	  	pottyTrips.remove(trip);
+
+	  	expect(pottyTrips.trips().length).toEqual(0);
+	  }));	  
+
+
+	  it('removes a trip by timestamp decrements trip list', inject(function(pottyTrips){
+	  	var now = Date.now();
+	  	var firstTimestamp = new Date(now);
+	  	var secondTimestamp = new Date(now + 10000);
+	  	var thirdTimestamp = new Date(now + 20000);
+
+	  	addWeeTripWithTime(pottyTrips, firstTimestamp);
+	  	addWeeTripWithTime(pottyTrips, secondTimestamp);
+	  	addWeeTripWithTime(pottyTrips, thirdTimestamp);
+
+	  	var trip = weeTrip();
+	  	trip.timestamp = secondTimestamp;
+	  	pottyTrips.remove(trip);
+
+	  	expect(pottyTrips.trips().length).toEqual(2);
+	  }));
+
+	  it('removes a trip by timestamp removing the specific trip only', inject(function(pottyTrips){
+	  	var now = Date.now();
+	  	var firstTimestamp = new Date(now);
+	  	var secondTimestamp = new Date(now + 1);
+	  	var thirdTimestamp = new Date(now + 2);
+
+	  	addWeeTripWithTime(pottyTrips, firstTimestamp);
+	  	addWeeTripWithTime(pottyTrips, secondTimestamp);
+	  	addWeeTripWithTime(pottyTrips, thirdTimestamp);
+
+	  	var trip = weeTrip();
+	  	trip.timestamp = secondTimestamp;
+	  	var index = pottyTrips.remove(trip);
+
+	  	expect(index).toEqual(1);
+	  	expect(pottyTrips.trips()[0].timestamp).toEqual(firstTimestamp);
+	  	expect(pottyTrips.trips()[1].timestamp).toEqual(thirdTimestamp);
+	  }));
+
+	  it('does not remove a trip if no trip timestamps match', inject(function(pottyTrips){
+	  	var now = Date.now();
+	  	var firstTimestamp = new Date(now);
+	  	var secondTimestamp = new Date(now + 1);
+	  	var thirdTimestamp = new Date(now + 2);
+
+	  	addWeeTripWithTime(pottyTrips, firstTimestamp);
+	  	addWeeTripWithTime(pottyTrips, secondTimestamp);
+	  	addWeeTripWithTime(pottyTrips, thirdTimestamp);
+
+	  	var trip = weeTrip();
+	  	trip.timestamp = new Date(Date.now() + 10000);
+	  	var index = pottyTrips.remove(trip);
+
+	  	expect(pottyTrips.trips().length).toEqual(3);
+	  }));
+	});
 });

@@ -69,6 +69,17 @@ angular.module('PottyPottyPotty')
       }
     }
 
+    function remove(trip){
+      var index = indexOf(function(pottyTrip){
+        return pottyTrip.timestamp.getTime() === trip.timestamp.getTime();
+      });
+
+      if(index !== -1){
+        pottyTrips.splice(index, 1);        
+      }
+      return index;
+    }
+
     function setTrips(trips){
       pottyTrips = angular.copy(trips);
     }
@@ -86,11 +97,21 @@ angular.module('PottyPottyPotty')
       }
     }
 
+    function indexOf(predicate){
+      for (var i = 0; i < pottyTrips.length; i++) {
+          if (predicate(pottyTrips[i])) {
+              return i;
+          }
+      }
+      return -1;
+    }
+
     // return public API only
   	return {
       setTimeStamper : setTimeStamper,
   		trips : trips,
       add : add,
+      remove : remove,
       setTrips : setTrips,
       resetTrips : resetTrips,
       isValid: isValid
