@@ -21,7 +21,7 @@ describe('Potty Potty Potty', function() {
     });
 
     it('has credits for open source and creative commons assets', function(){
-      var credits = element(by.id('credits'));
+      var credits = element(by.id('icon-credit'));
 
       expect(credits.getText()).toEqual('PottyPottyPotty icon derived from an icon by Freepik from www.flaticon.com. Licensed under Creative Commons by 3.0');
     });
