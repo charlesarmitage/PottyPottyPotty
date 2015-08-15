@@ -13,7 +13,11 @@
             Today
             </ion-item>
             <ion-item ng-repeat="trip in pottyTrips | orderBy:'-timestamp'">
-            <!-- TODO: Improve presentation. Supply text from controller -->
+
+            <div class="item-icon-right">
+                <a class="button button-icon icon ion-trash-b" ng-click="remove(trip)"></a>
+            </div>
+
             <span>{{::trip.typeText}}</span>
             <span><br/>{{::trip.timestamp | date:'HH:mm:ss'}}</span>
             <span ng-show="trip.timestampOfPreviousWee"><br/>Time since last wee was {{::trip.previousWeeText}}</span>
