@@ -54,13 +54,14 @@ describe("Potty Trips Service", function() {
 	};
 
 	describe('local storage usage', function() {
-		var fakeTrips;
+		var fakeTrips,
+			wee,
+			poo; 
 
 	    beforeEach( function() {
-	    	fakeTrips = [
-	    		weeTrip(),
-	    		pooTrip()
-	    	];
+	    	wee =weeTrip();
+	    	poo = pooTrip();
+	    	fakeTrips = [ wee, poo ];
 
 		    spyOn(mockLocalStorage, 'getObject').and.returnValue( fakeTrips );
 	    });
@@ -78,6 +79,12 @@ describe("Potty Trips Service", function() {
 		it('saves all trips on reset', inject(function(pottyTrips) {
 			pottyTrips.resetTrips();
 			expect(mockLocalStorage.setObject).toHaveBeenCalledWith('potty-trips', []);
+		}));
+
+		it('saves trips with specific trip deleted on remove', inject(function(pottyTrips) {
+			pottyTrips.remove(wee);
+
+			expect(mockLocalStorage.setObject).toHaveBeenCalledWith('potty-trips', [ poo ]);
 		}));
 	});
 
