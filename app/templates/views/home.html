@@ -15,7 +15,7 @@
             <ion-item ng-repeat="trip in pottyTrips | orderBy:'-timestamp'">
 
             <div class="item-icon-right">
-                <a id="delete-button" class="button button-icon icon ion-trash-b" ng-click="remove(trip)"></a>
+                <a id="delete-button" class="button button-icon icon ion-ios-close-empty" ng-click="remove(trip)"></a>
             </div>
 
             <span>{{::trip.typeText}}</span>

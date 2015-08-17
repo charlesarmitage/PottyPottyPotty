@@ -34,12 +34,12 @@ angular.module('PottyPottyPotty')
     $scope.loadPagedPottyTrips();
 
     $scope.remove = function(trip){
-      var confirmPopup = $ionicPopup.confirm({
+      var deletePopup = $ionicPopup.confirm({
         title: 'Delete Trip ?',
       });
 
-      confirmPopup.then(function(result) {
-        if(result) {
+      deletePopup.then(function(isConfirmed) {
+        if(isConfirmed) {
           pottyTrips.remove(trip);
         }
       });
