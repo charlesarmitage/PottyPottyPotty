@@ -75,7 +75,8 @@ angular.module('PottyPottyPotty')
       });
 
       if(index !== -1){
-        pottyTrips.splice(index, 1);        
+        pottyTrips.splice(index, 1);
+        localstorage.setObject('potty-trips', pottyTrips);        
       }
       return index;
     }

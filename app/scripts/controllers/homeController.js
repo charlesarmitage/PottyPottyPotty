@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('PottyPottyPotty')
-  .controller('HomeController', function($scope, $filter, pottyTrips) {
+  .controller('HomeController', function($scope, $filter, $ionicPopup, pottyTrips) {
     $scope.pottyTrips = [];
 
     $scope.loadPagedPottyTrips = function(){
@@ -32,6 +32,18 @@ angular.module('PottyPottyPotty')
         $scope.pottyTrips = trips;
     };
     $scope.loadPagedPottyTrips();
+
+    $scope.remove = function(trip){
+      var deletePopup = $ionicPopup.confirm({
+        title: 'Delete Trip ?',
+      });
+
+      deletePopup.then(function(isConfirmed) {
+        if(isConfirmed) {
+          pottyTrips.remove(trip);
+        }
+      });
+    };
 
     $scope.$watchCollection(function () { return pottyTrips.trips(); }, function (newVal, oldVal) {
         if (newVal !== oldVal) {
