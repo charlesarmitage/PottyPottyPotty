@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.cjra.pottypottypotty.free"
- version="0.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+ version="0.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>PottyPottyPotty</name>
   <description>
-    Free trial version of PottyPottyPotty app
+    Add your desription here
   </description>
   <author email="code@cjrarmitage.co.uk">
     Charles Armitage
