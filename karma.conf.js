@@ -26,6 +26,7 @@ module.exports = function(config) {
       'bower_components/ngCordova/dist/ng-cordova.js',
       'bower_components/ionic/js/ionic.js',
       'bower_components/ionic/js/ionic-angular.js',
+      "bower_components/ionic-timepicker/dist/ionic-timepicker.bundle.min.js",
       'app/scripts/**/*.js',
       'tests/specs/**/*spec.js'
     ],

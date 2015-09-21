@@ -10,7 +10,7 @@
  */
 
 
-angular.module('PottyPottyPotty', ['angularMoment', 'ionic', 'ngCordova', 'ngResource'])
+angular.module('PottyPottyPotty', ['angularMoment', 'ionic', 'ngCordova', 'ngResource', 'ionic-timepicker'])
 
   .run(function($ionicPlatform) {
 

@@ -5,6 +5,25 @@
     </ion-header-bar>
 
     <ion-content>
+		<div class="row" id="date-time-bar">
+		  <div class="col col-center">
+		  	<a class="button button-icon icon ion-ios-calendar-outline"></a>
+		  </div>
+		  <div class="col col-center">
+		    <h4>{{tripTime  | date:'dd/MM/yy'}}</h4>
+		  </div>
+		  <div class="col col-center ">
+		    <h4>{{tripTime  | date:'HH:mm'}}</h4>
+		  </div>
+		  <div class="col col-center col-offset-10">
+		    <ionic-timepicker input-obj="timePickerObject">
+			  	<a class="button button-icon icon ion-ios-clock-outline overflowShow">
+			  		<standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+			  	</a>
+		  	</ionic-timepicker>
+		  </div>
+		</div>
+
         <ul class="list">
             <li class="item item-checkbox">
                  <label class="checkbox checkbox-balanced">
@@ -27,7 +46,7 @@
     <span ng-show="isValid(trip)">
         <div class="bar bar-footer" style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px">
             <div class="button-bar">
-              <a ng-click="cancelAddTrip()" class="button button-full button-assertive" style="margin-top: 0px;margin-bottom: 0px" ui-sref="app.home" id="cancel-trip">
+              <a ng-click="cancelAddTrip()" class="button button-full button-stable" style="margin-top: 0px;margin-bottom: 0px" ui-sref="app.home" id="cancel-trip">
                 <i class="icon ion-close"></i>
               </a>
               <a ng-click="addTrip(trip)" class="button button-full button-balanced" style="margin-top: 0px;margin-bottom: 0px" ui-sref="app.home" id="save-trip">
