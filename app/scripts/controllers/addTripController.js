@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('PottyPottyPotty')
-  .controller('AddTripController', function($scope, pottyTrips) {
+  .controller('AddTripController', function($scope, pottyTrips, TimestampService) {
 
-  		$scope.tripTime = new Date(Date.now());
+  		$scope.localTripTime = new Date(Date.now());
+      $scope.tripTimeUtc = TimestampService.convert.secsToDate(
+                            TimestampService.convert.toUtc(new Date() /1000));
 
       $scope.trip = {
   			isWee: false,
@@ -15,6 +17,7 @@ angular.module('PottyPottyPotty')
       };
 
   		$scope.addTrip = function(trip){
+        trip.timestamp = $scope.tripTimeUtc;
   			pottyTrips.add(trip);
   			reset(); // TODO: May not be necessary
   		};
@@ -28,8 +31,20 @@ angular.module('PottyPottyPotty')
   			$scope.trip.isPoo = false;
   		}
 
+      function updateTime(epochTimeSecs) {
+        if (typeof (epochTimeSecs) !== 'undefined') {
+          
+          $scope.localTripTime = TimestampService.convert.toTodaysDate(
+                                  TimestampService.convert.secsToDate(epochTimeSecs));
+
+          $scope.tripTimeUtc = TimestampService.convert.toTodaysDate(
+                                TimestampService.convert.secsToDate(
+                                  TimestampService.convert.toUtc(epochTimeSecs)));
+        }
+      }
+
       $scope.timePickerObject = {
-        inputEpochTime: getLocalTimeAsSecondsSinceEpoch(), 
+        inputEpochTime: TimestampService.convert.toLocal($scope.localTripTime / 1000), 
         step: 1,
         format: 24,
         titleLabel: 'Trip time',
@@ -39,35 +54,4 @@ angular.module('PottyPottyPotty')
         closeButtonType: 'button-stable',
         callback: updateTime
       };
-
-      function getLocalTimeAsSecondsSinceEpoch()
-      {
-        var timezoneOffsetSecs = new Date().getTimezoneOffset() * 60;
-        return (Date.now() / 1000) - timezoneOffsetSecs;
-      }
-
-      function convertLocalTimeSinceEpochToUtc(localEpochTimeSecs)
-      {
-        var timezoneOffsetSecs = new Date().getTimezoneOffset() * 60;
-        var utcEpochTimeMs = (localEpochTimeSecs + timezoneOffsetSecs) * 1000;
-        return new Date(utcEpochTimeMs);
-      }
-
-      function updateTime(epochTimeSecs) {
-        if (typeof (epochTimeSecs) !== 'undefined') {
-          
-          $scope.tripTime = updateToToday(new Date(epochTimeSecs * 1000));
-          $scope.tripTimeUtc = convertLocalTimeSinceEpochToUtc(epochTimeSecs);
-
-          console.log('Epoch time is : ', $scope.tripTime, 'and the time is ', $scope.tripTime.getUTCHours(), ':', $scope.tripTime.getUTCMinutes(), 'in UTC');
-        }
-      }
-
-      function updateToToday(date) {
-          var today = new Date(Date.now());
-          date.setDate(today.getDate());
-          date.setMonth(today.getMonth());
-          date.setYear(today.getYear());
-          return date;
-      }
   });

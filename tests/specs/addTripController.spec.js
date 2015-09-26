@@ -122,6 +122,15 @@ describe("Add Trip Controller", function() {
 	  	});
 	  });
 
+	  it('adding a trip adds a trip with a timestamp to the trips list', function(){
+	  	$scope.tripTimeUtc = new Date();
+	  	$scope.trip.isWee = true;
+
+	  	$scope.addTrip($scope.trip);
+
+	  	expect(pottyTripsMock.trips()[0].timestamp).toEqual($scope.tripTimeUtc);
+	  });
+
 	  it('potty trips are added to end of the trips list', function(){
 	  	addTripToController($scope, { poo: true });
 	  	addTripToController($scope, { wee: true });

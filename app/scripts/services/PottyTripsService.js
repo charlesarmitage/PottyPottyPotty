@@ -12,10 +12,6 @@ angular.module('PottyPottyPotty')
 
   	var pottyTrips = angular.copy(convertDateStringsToObjects(localstorage.getObject('potty-trips', [])));
 
-    var timeStamper = function(){
-      return new Date();
-    };
-
     function lastPoo() {
       var poo;
       for (var i = 0; i < pottyTrips.length; i++) {
@@ -40,12 +36,7 @@ angular.module('PottyPottyPotty')
       return pottyTrips;
     }
 
-    function setTimeStamper(t){
-      timeStamper = t;
-    }
-
     function updateTripTimes(trip){
-      trip.timestamp = timeStamper();
       if(trip.isWee) {
         var lw = lastWee();
         if(lw !== undefined) {
@@ -109,7 +100,6 @@ angular.module('PottyPottyPotty')
 
     // return public API only
   	return {
-      setTimeStamper : setTimeStamper,
   		trips : trips,
       add : add,
       remove : remove,

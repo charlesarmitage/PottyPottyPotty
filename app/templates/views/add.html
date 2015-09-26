@@ -10,19 +10,23 @@
 		  	<a class="button button-icon icon ion-ios-calendar-outline"></a>
 		  </div>
 		  <div class="col col-center">
-		    <h4>{{tripTime  | date:'dd/MM/yy'}}</h4>
+		    <h4>{{localTripTime  | date:'dd/MM/yy'}}</h4>
 		  </div>
 		  <div class="col col-center ">
-		    <h4>{{tripTime  | date:'HH:mm'}}</h4>
+		    <h4>{{localTripTime  | date:'HH:mm'}}</h4>
 		  </div>
 		  <div class="col col-center col-offset-10">
 		    <ionic-timepicker input-obj="timePickerObject">
 			  	<a class="button button-icon icon ion-ios-clock-outline overflowShow">
-			  		<standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+			  		<standard-time-meridian etime='currentTime()'></standard-time-meridian>
 			  	</a>
 		  	</ionic-timepicker>
 		  </div>
 		</div>
+		<div class="row">
+    		<small>(UTC: {{tripTimeUtc  | date:'dd/MM/yy'}} {{tripTimeUtc  | date:'HH:mm'}})</small>
+    	</div>
+
 
         <ul class="list">
             <li class="item item-checkbox">
