@@ -19,9 +19,9 @@
             </div>
 
             <span>{{::trip.typeText}}</span>
-            <span><br/>{{::trip.timestampAsLocal | date:'HH:mm:ss'}}</span>
-            <span ng-show="trip.timestampOfPreviousWee"><br/>Time since last wee was {{::trip.previousWeeText}}</span>
-            <span ng-show="trip.timestampOfPreviousPoo"><br/>Time since last poo was {{::trip.previousPooText}}</span>
+            <span><br/>{{::trip.timestampAsLocal | date:'dd/MM/yy HH:mm:ss:sss'}}</span>
+            <span ng-show="trip.previousWeeText"><br/>Time since last wee was {{::trip.previousWeeText}}</span>
+            <span ng-show="trip.previousPooText"><br/>Time since last poo was {{::trip.previousPooText}}</span>
             </ion-item>
         </ion-list>
     </ion-content>

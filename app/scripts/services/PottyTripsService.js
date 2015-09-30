@@ -3,59 +3,29 @@
 angular.module('PottyPottyPotty')
   .factory('pottyTrips', function(localstorage) {
 
+    var byTimestamp = function (lhsTrip, rhsTrip) {
+      return lhsTrip.timestamp - rhsTrip.timestamp;
+    };
+
     var convertDateStringsToObjects = function(trips){
       for (var i = 0; i < trips.length; i++) {
         trips[i].timestamp = new Date(trips[i].timestamp);
       }
+      trips.sort(byTimestamp);
       return trips;
     };
 
   	var pottyTrips = angular.copy(convertDateStringsToObjects(localstorage.getObject('potty-trips', [])));
 
-    function lastPoo() {
-      var poo;
-      for (var i = 0; i < pottyTrips.length; i++) {
-        if(pottyTrips[i].isPoo) {
-          poo = pottyTrips[i];
-        }
-      }
-      return poo;
-    }
-
-    function lastWee() {
-      var wee;
-      for (var i = 0; i < pottyTrips.length; i++) {
-        if(pottyTrips[i].isWee) {
-          wee = pottyTrips[i];
-        }
-      }
-      return wee;
-    }
-
     function trips(){
       return pottyTrips;
-    }
-
-    function updateTripTimes(trip){
-      if(trip.isWee) {
-        var lw = lastWee();
-        if(lw !== undefined) {
-          trip.timestampOfPreviousWee = lw.timestamp;
-        }
-      }
-      if(trip.isPoo) {
-        var lp = lastPoo();
-        if(lp !== undefined) {
-          trip.timestampOfPreviousPoo = lp.timestamp;
-        }
-      }
     }
 
     function add(trip){
       if(isValid(trip)){
         var newTrip = angular.copy(trip);
-        updateTripTimes(newTrip);
         pottyTrips.push(newTrip);
+        trips().sort(byTimestamp);
         localstorage.setObject('potty-trips', pottyTrips);
       }
     }

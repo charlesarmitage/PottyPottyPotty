@@ -6,16 +6,13 @@
 
     <ion-content>
 		<div class="row" id="date-time-bar">
-		  <div class="col col-center">
+		  <div class="col col-center col-20">
 		  	<a class="button button-icon icon ion-ios-calendar-outline"></a>
 		  </div>
 		  <div class="col col-center">
-		    <h4>{{localTripTime  | date:'dd/MM/yy'}}</h4>
+		    <h4>{{localTripTime  | date:'dd/MM/yy HH:mm'}}</h4>
 		  </div>
-		  <div class="col col-center ">
-		    <h4>{{localTripTime  | date:'HH:mm'}}</h4>
-		  </div>
-		  <div class="col col-center col-offset-10">
+		  <div class="col col-left col-20">
 		    <ionic-timepicker input-obj="timePickerObject">
 			  	<a class="button button-icon icon ion-ios-clock-outline overflowShow">
 			  		<standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>

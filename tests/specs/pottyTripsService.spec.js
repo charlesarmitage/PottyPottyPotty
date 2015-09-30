@@ -134,34 +134,7 @@ describe("Potty Trips Service", function() {
 
 	    expect(pottyTrips.trips().length).toEqual(0);
 	  }));
-
-	  it('records timestamp of last wee trip', inject(function(pottyTrips){
-	  	var now = new Date();
-	  	addWeeTripWithTime(pottyTrips, now);
-
-	  	addPooTripWithTime(pottyTrips, new Date(now.getTime() + 5000));
-
-	  	var nowPlusTenSeconds = new Date(now.getTime() + 10000);
-	  	addWeeTripWithTime(pottyTrips, nowPlusTenSeconds);
-
-	  	var lastTrip = pottyTrips.trips()[pottyTrips.trips().length-1];
-	  	expect(lastTrip.timestampOfPreviousWee).toEqual(now);
-	  	expect(lastTrip.timestampOfPreviousPoo).toEqual(undefined);
-	  }));
-
-	  it('records timestamp of last poo trip', inject(function(pottyTrips){
-	  	var now = new Date();
-	  	addPooTripWithTime(pottyTrips, now);
-
-	  	addWeeTripWithTime(pottyTrips, new Date(now.getTime() + 5000));
-
-	  	var nowPlusTenSeconds = new Date(now.getTime() + 10000);
-	  	addPooTripWithTime(pottyTrips, nowPlusTenSeconds);
-
-	  	var lastTrip = pottyTrips.trips()[pottyTrips.trips().length-1];
-	  	expect(lastTrip.timestampOfPreviousPoo).toEqual(now);
-	  	expect(lastTrip.timestampOfPreviousWee).toEqual(undefined);
-	  }));
+	  
 	});
 
 	describe('Removing a potty trip', function(){
@@ -173,7 +146,6 @@ describe("Potty Trips Service", function() {
 
 	  	expect(pottyTrips.trips().length).toEqual(0);
 	  }));	  
-
 
 	  it('removes a trip by timestamp decrements trip list', inject(function(pottyTrips){
 	  	var now = Date.now();
