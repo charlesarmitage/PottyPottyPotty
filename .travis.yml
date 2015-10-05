@@ -28,7 +28,7 @@ install:
 script:
   - gulp build
   - gulp unittest
-  - gulp e2e-tests-headless
+  #- gulp e2e-tests-headless
 
   # Either try to build with gradle but without the gradle daemon, works intermittently
   #- gulp build-android-no-gradle-daemon -b
@@ -46,7 +46,7 @@ before_deploy:
   - pip install --user PyOpenSSL
   - pip install --user --upgrade google-api-python-client
   # Upload to play store - TODO: Move to deploy script
-  - ./upload_to_play_store.py -p com.cjra.pottypottypotty -a builds/android/pottypottypotty.apk -s GooglePlayAndroidDeveloper-4d336e73004e.json
+  - ./upload_to_play_store.py -p com.cjra.pottypottypotty.free -a builds/android/pottypottypotty.apk -s GooglePlayAndroidDeveloper-4d336e73004e.json
 
 deploy:
   provider: releases
